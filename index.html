@@ -11,11 +11,15 @@
 	<body>
 		<div id="welcome" style="display: block">
 			<button onclick="show(welcome, login)">Login</button>
-			<button onclick="show(welcome, app)">Register</button>
+			<button onclick="show(welcome, register)">Register</button>
 		</div>
 
 		<div id="register" style="display: none">
-			amit
+			<form action="/action_page.php">
+				<input type="text" id="fname" name="fname" placeholder="Enter Username" required><br>
+				<input type="text" id="lname" name="lname" vplaceholder="Enter Username" required><br>
+				<input type="submit" value="Submit">
+			  </form>
 		</div>
 
 		<div id="login" style="display: none">
