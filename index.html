@@ -23,12 +23,19 @@
 		</div>
 
 		<div id="login" style="display: none">
-			<form>
-				<input type="text" id="fname" name="fname" placeholder="Username" required><br>
-				<input type="text" id="fname" name="fname" placeholder="password" required><br>
-				<input type="submit" value="Submit">
+			<form id="loginForm">
+				<div>
+
+				<input type="text" id="username" placeholder="Username" required><br>
+				<input type="password" id="password" placeholder="password" required><br>
+				<input class="formButton" type="button" value="test" onclick="logIn()">
+				<button class="formButton" type="button" onclick="logIn()">Log In</button>
+				<button class="formButton" type="submit" onclick="show(login, welcome)">Cancel</button>
+			</div>
+
 			</form> 
 		</div>
+		
 
 		<div id="settings" style="display: none">
 			amit
