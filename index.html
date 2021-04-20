@@ -15,10 +15,14 @@
 		</div>
 
 		<div id="register" style="display: none">
-			<form action="/action_page.php">
-				<input type="text" id="fname" name="fname " placeholder="Enter Username" required><br>
-				<input type="text" id="lname" name="lname" vplaceholder="Enter Username" required><br>
-				<input type="submit" value="Submit">
+			<form id="registerForm">
+				<input type="text" id="Username" placeholder="Enter Username" required><br>
+				<input type="text" id="Password"  placeholder="Enter Password" required><br>
+				<input type="text" id="FullName"  placeholder="Enter Full Name" required><br>
+				<input type="text" id="Email" placeholder="Enter Email" required><br>
+				<label for="birthday">Birthday:</label>
+				<input type="date" id="birthday">
+				<button type="button" onclick="submitDetils()" value="submit">
 			  </form>
 		</div>
 
