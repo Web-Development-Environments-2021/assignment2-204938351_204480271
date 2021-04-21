@@ -10,6 +10,7 @@ var food_remain=50;
 var numOf5PointsBall=30;
 var numOf15PointsBall=15;
 var numOf25PointsBall=5;
+var ballPoints = [numOf5PointsBall, numOf15PointsBall, numOf25PointsBall]
 
 // $(document).ready(function() {
 // 	context = canvas.getContext("2d");
@@ -40,41 +41,49 @@ function Start() {
 			} else {
 				var randomNum = Math.random();
 				if (randomNum <= (1.0 * food_remain) / cnt) {
+					// console.log('first: rand=' + randomNum + '<= ' + (1.0 * food_remain) / cnt)
 					food_remain--;
-					board[i][j] = 1212;
+					// console.log(food_remain);
+					var randomBall = Math.floor(Math.random()*3)+2
+					board[i][j] = randomBall;
+					ballPoints[randomBall-1] --;
 				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
+					// console.log('second: rand=' + randomNum + '<' + (1.0 * (pacman_remain + food_remain)) / cnt);
 					shape.i = i;
 					shape.j = j;
 					pacman_remain--;
-					board[i][j] = 1;
+					// console.log(pacman_remain)
+					board[i][j] = 5;
 				} else {
+					console.log('third:' + randomNum);
 					board[i][j] = 0;
 				}
 				cnt--;
 			}
 		}
 	}
-	while (food_remain > 0) {
-		var emptyCell = findRandomEmptyCell(board);
-		board[emptyCell[0]][emptyCell[1]] = 1212;
-		food_remain--;
-	}
+	// while (food_remain > 0) {
+	// 	var emptyCell = findRandomEmptyCell(board);
+	// 	board[emptyCell[0]][emptyCell[1]] = 1212;
+	// 	food_remain--;
+	// }
 	
-	// while (numOf5PointsBall > 0) {
-	// 	var emptyCell = findRandomEmptyCell(board);
-	// 	board[emptyCell[0]][emptyCell[1]] = 5;
-	// 	numOf5PointsBall--;
-	// }
-	// while (numOf15PointsBall > 0) {
-	// 	var emptyCell = findRandomEmptyCell(board);
-	// 	board[emptyCell[0]][emptyCell[1]] = 15;
-	// 	numOf15PointsBall--;
-	// }
-	// while (numOf25PointsBall > 0) {
-	// 	var emptyCell = findRandomEmptyCell(board);
-	// 	board[emptyCell[0]][emptyCell[1]] = 25;
-	// 	numOf15PointsBall--;
-	// }
+	while (ballPoints[0] > 0) {
+		var emptyCell = findRandomEmptyCell(board);
+		board[emptyCell[0]][emptyCell[1]] = 1;
+		ballPoints[0]--;
+	}
+	while (ballPoints[1] > 0) {
+		var emptyCell = findRandomEmptyCell(board);
+		board[emptyCell[0]][emptyCell[1]] = 2;
+		ballPoints[1]--;
+	}
+	while (ballPoints[2] > 0) {
+		var emptyCell = findRandomEmptyCell(board);
+		board[emptyCell[0]][emptyCell[1]] = 3;
+		ballPoints[2]--;
+	}
+
 	keysDown = {};
 	addEventListener(
 		"keydown",
@@ -127,7 +136,7 @@ function Draw() {
 			var center = new Object();
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
-			if (board[i][j] == 1) {
+			if (board[i][j] == 5) {
 				context.beginPath();
 				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
 				context.lineTo(center.x, center.y);
@@ -137,27 +146,27 @@ function Draw() {
 				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
-			} else if (board[i][j] == 1212) {
+			// } else if (board[i][j] == 1212) {
+			// 	context.beginPath();
+			// 	context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+			// 	context.fillStyle = "black"; //color
+			// 	context.fill();
+
+			} else if (board[i][j] == 1) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "black"; //color
+				context.fillStyle = "blue"; //color
 				context.fill();
-
-			// } else if (board[i][j] == 5) {
-			// 	context.beginPath();
-			// 	context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-			// 	context.fillStyle = "red"; //color
-			// 	context.fill();
-			// } else if (board[i][j] == 15) {
-			// 	context.beginPath();
-			// 	context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-			// 	context.fillStyle = "blue"; //color
-			// 	context.fill();
-			// } else if (board[i][j] == 25) {
-			// 	context.beginPath();
-			// 	context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-			// 	context.fillStyle = "green"; //color
-			// 	context.fill();
+			} else if (board[i][j] == 2) {
+				context.beginPath();
+				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.fillStyle = "green"; //color
+				context.fill();
+			} else if (board[i][j] == 3) {
+				context.beginPath();
+				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.fillStyle = "red"; //color
+				context.fill();
 
 
 			} else if (board[i][j] == 4) {
@@ -196,7 +205,7 @@ function UpdatePosition() {
 	if (board[shape.i][shape.j] == 1212) {
 		score++;
 	}
-	board[shape.i][shape.j] = 1;
+	board[shape.i][shape.j] = 5;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
 	if (score >= 20 && time_elapsed <= 10) {
