@@ -32,19 +32,61 @@
 
 				<input type="text" id="username" placeholder="Username" required><br>
 				<input type="password" id="password" placeholder="password" required><br>
-				<input class="formButton" type="button" value="test" onclick="logIn()">
 				<button class="formButton" type="button" onclick="logIn()">Log In</button>
-				<button class="formButton" type="submit" onclick="show(login, welcome)">Cancel</button>
+				<button class="formButton" type="button" onclick="show(login, welcome)">Cancel</button>
 			</div>
 
 			</form> 
-		</div>
-		
+		</div>		
 
 		<div id="settings" style="display: none">
-			amit
-		</div>
+			<h5>set keys</h5>
+			<input type="text" id="keyLeft" placeholder="left" onkeydown="setKey(left, event)" maxlength="1"><br>
+			<input type="text" id="keyUp" placeholder="up" onkeydown="setKey(up, event)" maxlength="1"><br>
+			<input type="text" id="keyRight" placeholder="right" onkeydown="setKey(right, event)" maxlength="1"><br>
+			<input type="text" id="keysDown" placeholder="down" onkeydown="setKey(down, event)" maxlength="1"><br>
+			<!-- <button class="formButton" type="button" onclick="logIn()">Log In</button> -->
 
+			<h5>set number of balls</h5>
+			<div class="slidecontainer">
+				<input type="range" min="50" max="90" value="70" class="slider" id="setBallsNum" onchange="setBallsNum(value)">
+			</div>
+
+			<h5>set balls color</h5>
+			<div>
+				<input type="color" id="ball5Points" value="#e66465" onchange="setballsColor(5, value)">
+				<label for="head">5 points ball color</label>
+			</div>
+			<div>
+				<input type="color" id="ball15Points" value="#FF7B33" onchange="setballsColor(15, value)">
+				<label for="head">15 points ball color</label>
+			</div>
+			<div>
+				<input type="color" id="ball25Points" value="#f6b73c" onchange="setballsColor(25, value)">
+				<label for="head">25 points ball color</label>
+			</div>
+
+			<h5>set game time</h5>
+			<div class="slidecontainer">
+				<input type="range" min="60" max="300" value="150" class="slider" id="setGameTime" onchange="setgameTime(value)">sec
+			</div>
+
+			<h5>set amount of monsters</h5>
+			<form>
+				<input type="radio" id="monster1" name="monsters" value="1" onclick="setNumOfMonsters(value)">
+				<label for="male">1 monsters</label><br>
+				<input type="radio" id="monster2" name="monsters" value="2" onclick="setNumOfMonsters(value)">
+				<label for="female">2 monsters</label><br>
+				<input type="radio" id="monster3" name="monsters" value="3" onclick="setNumOfMonsters(value)">
+				<label for="other">3 monsters</label><br>
+				<input type="radio" id="monster4" name="monsters" value="4" onclick="setNumOfMonsters(value)">
+				<label for="other">4 monsters</label><br>
+			</form>	
+
+			<button class="settingButton" type="button" onclick="setRandomSettings()">random</button>
+
+			
+			
 
 		<div id="app" style="display: none">
 			<div id="score">
