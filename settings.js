@@ -31,6 +31,7 @@ function setBallsNum(num) {
     numOf5PointsBall = Math.ceil(0.6*num);
     numOf15PointsBall = Math.ceil(0.3*num);
     numOf25PointsBall = Math.ceil(0.1*num);
+    var ballPoints = [numOf5PointsBall, numOf15PointsBall, numOf25PointsBall]
 }
 
 function setballsColor(points, color) {
