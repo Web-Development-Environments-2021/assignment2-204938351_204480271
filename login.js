@@ -4,7 +4,7 @@ function logIn() {
         show(login, settings);
     }
     else {
-        alert("Wrong username or password. Please try again")
+        document.getElementById("loginError").innerHTML = "Wrong username or password. Please try again";
     }
 }
 

@@ -16,14 +16,13 @@
 
 		<div id="register" style="display: none">
 			<form id="registerForm">
-				<!-- add the required -->
-				<input type="text" id="Username" placeholder="Enter Username" ><br>
-				<input type="text" id="Password"  placeholder="Enter Password" ><br>
-				<input type="text" id="FullName"  placeholder="Enter Full Name" ><br>
-				<input type="text" id="Email" placeholder="Enter Email" ><br>
+				<input type="text" id="Username" placeholder="Enter Username" required><br>
+				<input type="text" id="Password"  placeholder="Enter Password" required><br>
+				<input type="text" id="FullName"  placeholder="Enter Full Name" required><br>
+				<input type="text" id="Email" placeholder="Enter Email" required><br>
 				<label for="birthday">Birthday:</label>
-				<input type="date" id="Birthday">
-				<button type="button" onclick="submitDetils()" value="submit">Submit</button>
+				<input type="date" id="Birthday" required>
+				<button type="button" onclick="submitDetails()" value="submit">Submit</button>
 				<button type="button" onclick="show(register, welcome)" value="submit">Cancel</button>
 			  </form>
 			  <p id="submitionError"></p>
@@ -38,8 +37,8 @@
 				<button class="formButton" type="button" onclick="logIn()">Log In</button>
 				<button class="formButton" type="button" onclick="show(login, welcome)">Cancel</button>
 			</div>
-
 			</form> 
+			<p id="loginError"></p>
 		</div>		
 
 		<div id="settings" style="display: none">

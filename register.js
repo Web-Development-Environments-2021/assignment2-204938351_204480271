@@ -1,6 +1,6 @@
-var allUsers = [{userName: "noaamit", password: "na1234", fullName: "noaAmit", email: "noaamit@g.com", birthDate: "2021-04-06"}]
+var allUsers = [{userName: "a", password: "aaaa1111", fullName: "a", email: "a@a.com", birthDate: "2021-04-06"}]
 
-function submitDetils(){
+function submitDetails(){
     let password = $("#Password").val();
     let fullName = $("#FullName").val();
     let email = $("#Email").val();
@@ -18,6 +18,9 @@ function submitDetils(){
         
         allUsers.push(newUser);
         console.log(allUsers)
+
+        registerForm.reset();
+        show(register, settings);
         }
     }
 
