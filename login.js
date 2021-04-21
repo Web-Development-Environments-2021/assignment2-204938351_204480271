@@ -1,4 +1,4 @@
-import allUsers from register.js
+
 
 function logIn() {
     // if (isValidLogin()) {
