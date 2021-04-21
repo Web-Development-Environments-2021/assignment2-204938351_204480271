@@ -6,10 +6,33 @@
 		<script type="text/javascript" src="./login.js"></script>
 		<script type="text/javascript" src="./settings.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
+		<script type="text/javascript" src="./aboutModal.js"></script>
+		<link rel="stylesheet" type="text/css" href="styles.css" />
 	</head>
+	<div class="topnav">
+		<a class="active" href="#welcome">Main Menu</a>
+		<a href="#settings">Settings</a>
+		<a href="#about">About</a>
+		<a href="#login" right>About</a>
+	  </div>
+
+
+	<!-- Trigger/Open The Modal -->
+	<button id="myBtn">Open Modal</button>
+
+	<!-- The Modal -->
+	<div id="myModal" class="modal">
+  		<!-- Modal content -->
+  		<div class="modal-content">
+    		<span class="close">&times;</span>
+   			<p>Some text in the Modal..</p>
+  		</div>
+	</div>
+
 
 	<body>
 		<div id="welcome" style="display: block">
+			<!-- <img src="pics/pacmanLogo.png"> -->
 			<button onclick="show(welcome, login)">Login</button>
 			<button onclick="show(welcome, register)">Register</button>
 		</div>
