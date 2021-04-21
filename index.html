@@ -9,6 +9,20 @@
 	</head>
 
 	<body>
+		<div id="app" style="display: none">
+			<div id="score">
+				<label for="lblScore">SCORE:</label>
+				<input id="lblScore" type="text" />
+			</div>
+			<div id="time">
+				<label for="lblTime">TIME:</label>
+				<input id="lblTime" type="text" />
+			</div>
+			<div id="game">
+				<canvas id="canvas" height="600" width="600"></canvas>
+			</div>
+		</div>
+
 		<div id="welcome" style="display: block">
 			<button onclick="show(welcome, login)">Login</button>
 			<button onclick="show(welcome, register)">Register</button>
@@ -43,10 +57,10 @@
 
 		<div id="settings" style="display: none">
 			<h5>set keys</h5>
-			<input type="text" id="keyLeft" placeholder="left" onkeydown="setKey(left, event)" maxlength="1"><br>
-			<input type="text" id="keyUp" placeholder="up" onkeydown="setKey(up, event)" maxlength="1"><br>
-			<input type="text" id="keyRight" placeholder="right" onkeydown="setKey(right, event)" maxlength="1"><br>
-			<input type="text" id="keysDown" placeholder="down" onkeydown="setKey(down, event)" maxlength="1"><br>
+			<input type="text" id="keyLeft" placeholder="left" onkeydown="setKey('left', event)" maxlength="1"><br>
+			<input type="text" id="keyUp" placeholder="up" onkeydown="setKey('up', event)" maxlength="1"><br>
+			<input type="text" id="keyRight" placeholder="right" onkeydown="setKey('right', event)" maxlength="1"><br>
+			<input type="text" id="keysDown" placeholder="down" onkeydown="setKey('down', event)" maxlength="1"><br>
 			<!-- <button class="formButton" type="button" onclick="logIn()">Log In</button> -->
 
 			<h5>set number of balls</h5>
@@ -86,23 +100,9 @@
 			</form>	
 
 			<button class="settingButton" type="button" onclick="setRandomSettings()">random</button>
+			<!-- <button class="playButton" type="button" onclick="show(settings, app)">play</button> -->
+			<button class="playButton" type="button" onclick="play()">play</button>
 
-			
-			
-
-		<div id="app" style="display: none">
-			<div id="score">
-				<label for="lblScore">SCORE:</label>
-				<input id="lblScore" type="text" />
-			</div>
-			<div id="time">
-				<label for="lblTime">TIME:</label>
-				<input id="lblTime" type="text" />
-			</div>
-			<div id="game">
-				<canvas id="canvas" height="600" width="600"></canvas>
-			</div>
-		</div>
 	</body>
 
 	<script>
