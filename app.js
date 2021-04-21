@@ -83,16 +83,16 @@ function findRandomEmptyCell(board) {
 }
 
 function GetKeyPressed() {
-	if (keysDown[38]) {
+	if (keysDown[upKey]) {
 		return 1;
 	}
-	if (keysDown[40]) {
+	if (keysDown[downKey]) {
 		return 2;
 	}
-	if (keysDown[37]) {
+	if (keysDown[leftKey]) {
 		return 3;
 	}
-	if (keysDown[39]) {
+	if (keysDown[rightKey]) {
 		return 4;
 	}
 }
