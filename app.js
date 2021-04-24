@@ -44,7 +44,7 @@ function Start() {
 					// console.log('first: rand=' + randomNum + '<= ' + (1.0 * food_remain) / cnt)
 					food_remain--;
 					// console.log(food_remain);
-					var randomBall = Math.floor(Math.random()*3)+2
+					var randomBall = Math.floor(Math.random()*2)+2
 					board[i][j] = randomBall;
 					ballPoints[randomBall-1] --;
 				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
