@@ -21,8 +21,13 @@ function submitDetails(){
 
         registerForm.reset();
         show(register, settings);
+        usernameOnMenuBar(username);
+
         }
     }
+  function usernameOnMenuBar(userName){
+    document.getElementById("helloUsername").innerHTML = "Hello, "+userName;
+  }
 
 
 
