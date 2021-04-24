@@ -9,11 +9,11 @@
 		<script type="text/javascript" src="./aboutModal.js"></script>
 		<link rel="stylesheet" type="text/css" href="styles.css" />
 	</head>
-	<div class="topnav">
-		<a class="active" href="#welcome">Main Menu</a>
-		<a href="#settings">Settings</a>
+	<div id= "menu"class="topnav">
+		<a class="btn active" onclick="menuClickShow(welcome)">Main Menu</a>
+		<a class="btn" onclick="menuClickShow(settings)">Settings</a>
 		<a onclick="openDialog(),closeModal();" href="#about">About</a>
-		<a href="#login" right>About</a>
+		<p id="helloUsername">Hello, Guest</p>
 	  </div>
 
 	  <div id="aboutModal" class="modal"  style="display: none">
@@ -48,8 +48,8 @@
 
 		<div id="welcome" style="display: block">
 			<!-- <img src="pics/pacmanLogo.png"> -->
-			<button onclick="show(welcome, login)">Login</button>
-			<button onclick="show(welcome, register)">Register</button>
+			<button class="menuBut" onclick="show(welcome, login)">Login</button>
+			<button class="menuBut" onclick="show(welcome, register)">Register</button>
 		</div>
 
 		<div id="register" style="display: none">
@@ -133,6 +133,39 @@
 		function show(toHide, toShow) {
 			toHide.style.display="none"
 			toShow.style.display="block"
+		}
+		function menuClickShow(pressedOption){
+			pressedOption.style.display="block"
+			if (pressedOption != welcome){
+				welcome.style.display="none"
+			}
+			if (pressedOption != app){
+				app.style.display="none"
+			}
+			if (pressedOption != time){
+				time.style.display="none"
+			}
+			if (pressedOption != game){
+				game.style.display="none"
+			}
+			if (pressedOption != settings){
+				settings.style.display="none"
+			}
+			if (pressedOption != login){
+				login.style.display="none"
+			}
+			if (pressedOption != register){
+				register.style.display="none"
+			}
+			var header = document.getElementById("menu");
+			var btns = header.getElementsByClassName("btn");
+			for (var i = 0; i < btns.length; i++) {
+				btns[i].addEventListener("click", function() {
+				var current = document.getElementsByClassName("active");
+				current[0].className = current[0].className.replace(" active", "");
+				this.className += " active";
+				});
+			}
 		}
 	</script>
 

@@ -3,6 +3,10 @@ body{
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: 100% 100%;
+    color: white;
+}
+#settings{
+  color: white;
 }
 .topnav {
     overflow: hidden;
@@ -17,6 +21,14 @@ body{
     text-decoration: none;
     font-size: 17px;
   }
+  .topnav p {
+    color: #f2f2f2;
+    text-align: right;
+    /* padding: 14px 16px; */
+    text-decoration: none;
+    font-size: 17px;
+    margin-right: 25px;
+  }
   
   .topnav a:hover {
     background-color: #ddd;
@@ -27,7 +39,18 @@ body{
     background-color: #4CAF50;
     color: white;
   }
-/* The Modal (background) */
+/* #welcome{
+  display: table; 
+}
+.menuBut{
+  width: 200px;
+  height: 200px;
+  background: #0088cc;
+  padding: 2%;
+  display: table-cell;
+  text-align: center;
+  vertical-align: bottom;
+} */
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */

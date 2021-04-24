@@ -11,6 +11,7 @@ var numOf5PointsBall=30;
 var numOf15PointsBall=15;
 var numOf25PointsBall=5;
 var ballPoints = [numOf5PointsBall, numOf15PointsBall, numOf25PointsBall]
+var lastPressed=8; //pacman always looks to the right 
 
 // $(document).ready(function() {
 // 	context = canvas.getContext("2d");
@@ -99,7 +100,7 @@ function Start() {
 		},
 		false
 	);
-	interval = setInterval(UpdatePosition, 250);
+	interval = setInterval(UpdatePosition, 100);
 }
 
 function findRandomEmptyCell(board) {
@@ -114,16 +115,16 @@ function findRandomEmptyCell(board) {
 
 function GetKeyPressed() {
 	if (keysDown[upKey]) {
-		return 1;
+		return 5;
 	}
 	if (keysDown[downKey]) {
-		return 2;
+		return 6;
 	}
 	if (keysDown[leftKey]) {
-		return 3;
+		return 7;
 	}
 	if (keysDown[rightKey]) {
-		return 4;
+		return 8;
 	}
 }
 
@@ -136,7 +137,45 @@ function Draw() {
 			var center = new Object();
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
-			if (board[i][j] == 5) {
+			if (board[i][j] == 5) {    //up
+				context.beginPath();
+				context.arc(center.x, center.y, 30, 1.65 * Math.PI, 1.35 * Math.PI); // half circle
+				context.lineTo(center.x, center.y);
+				context.fillStyle = pac_color; //color
+				context.fill();
+				context.beginPath();
+				context.arc(center.x - 15, center.y - 5 , 5, 0, 2 * Math.PI); // circle
+				context.fillStyle = "black"; //color
+				context.fill();
+			// } else if (board[i][j] == 1212) {
+			// 	context.beginPath();
+			// 	context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+			// 	context.fillStyle = "black"; //color
+			// 	context.fill();
+			}
+			else if (board[i][j] == 6) {     //down
+				context.beginPath();
+				context.arc(center.x, center.y, 30, 0.35 * Math.PI, 0.65 * Math.PI,true); // half circle
+				context.lineTo(center.x, center.y);
+				context.fillStyle = pac_color; //color
+				context.fill();
+				context.beginPath();
+				context.arc(center.x + 15, center.y + 5, 5, 0, 2 * Math.PI); // circle
+				context.fillStyle = "black"; //color
+				context.fill();
+			}
+			else if (board[i][j] == 7) {    //left
+				context.beginPath();
+				context.arc(center.x, center.y, 30, 0.85 * Math.PI, 1.15 * Math.PI,true); // half circle
+				context.lineTo(center.x, center.y);
+				context.fillStyle = pac_color; //color
+				context.fill();
+				context.beginPath();
+				context.arc(center.x - 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
+				context.fillStyle = "black"; //color
+				context.fill();
+			}
+			else if (board[i][j] == 8) {    //right
 				context.beginPath();
 				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
 				context.lineTo(center.x, center.y);
@@ -146,30 +185,28 @@ function Draw() {
 				context.arc(center.x + 5, center.y - 15, 5, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
-			// } else if (board[i][j] == 1212) {
-			// 	context.beginPath();
-			// 	context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-			// 	context.fillStyle = "black"; //color
-			// 	context.fill();
-
-			} else if (board[i][j] == 1) {
+			}
+			 else if (board[i][j] == 1) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = "blue"; //color
 				context.fill();
-			} else if (board[i][j] == 2) {
+			} 
+			else if (board[i][j] == 2) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = "green"; //color
 				context.fill();
-			} else if (board[i][j] == 3) {
+			} 
+			else if (board[i][j] == 3) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = "red"; //color
 				context.fill();
 
 
-			} else if (board[i][j] == 4) {
+			} 
+			else if (board[i][j] == 4) {
 				context.beginPath();
 				context.rect(center.x - 30, center.y - 30, 60, 60);
 				context.fillStyle = "grey"; //color
@@ -182,36 +219,47 @@ function Draw() {
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
 	var x = GetKeyPressed();
-	if (x == 1) {
+	if (x == 5) {   //up
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
 			shape.j--;
 		}
+		lastPressed = 5;
 	}
-	if (x == 2) {
+	if (x == 6) {   //down
 		if (shape.j < 9 && board[shape.i][shape.j + 1] != 4) {
 			shape.j++;
 		}
+		lastPressed = 6;
 	}
-	if (x == 3) {
+	if (x == 7) {    //left
 		if (shape.i > 0 && board[shape.i - 1][shape.j] != 4) {
 			shape.i--;
 		}
+		lastPressed = 7;
 	}
-	if (x == 4) {
+	if (x == 8) {    //right
 		if (shape.i < 9 && board[shape.i + 1][shape.j] != 4) {
 			shape.i++;
+			
 		}
+		lastPressed = 8;
 	}
-	if (board[shape.i][shape.j] == 1212) {
-		score++;
+	if (board[shape.i][shape.j] == 1) {   //TODO: Make sure the score addition matches the color of the ball
+		score+= 5;
 	}
-	board[shape.i][shape.j] = 5;
+	if (board[shape.i][shape.j] == 2) {
+		score+= 15;
+	}
+	if (board[shape.i][shape.j] == 3) {
+		score+= 25;
+	}
+	board[shape.i][shape.j] = lastPressed;
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-	if (score >= 20 && time_elapsed <= 10) {
+	if (score >= 2000 && time_elapsed <= 1000) {
 		pac_color = "green";
 	}
-	if (score == 50) {
+	if (score == 500) {
 		window.clearInterval(interval);
 		window.alert("Game completed");
 	} else {
