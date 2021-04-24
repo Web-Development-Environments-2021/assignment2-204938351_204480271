@@ -193,7 +193,7 @@ function Draw() {
 				context.fill();
 			} 
 			else if (board[i][j] == 2) {
-				context.beginPath();
+				context.beginPath(); 
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = "green"; //color
 				context.fill();
