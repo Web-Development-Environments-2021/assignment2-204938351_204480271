@@ -4,6 +4,7 @@ var monster1 = new Object();
 var monster2 = new Object();
 var monster3 = new Object();
 var monster4 = new Object();
+var monsters = new Array();
 var bonusStrawberryShape = new Object();
 var board;
 var life;
@@ -27,6 +28,11 @@ var pacman_remain = 1;
 var medicine_remain = 1;
 var cnt = 100;
 var numOfMonsters = 1
+var leftKey = 37;
+var upKey = 38;
+var rightKey = 39;
+var downKey = 40;
+var gameTime = 150;
 
 
 
@@ -41,9 +47,7 @@ function Start() {
 	life = 5;
 	pac_color = "yellow";
 	// food_remain = setBallsNum($("#setBallsNum").val());
-	console.log(ballPoints); //TODO: delete
 	start_time = new Date();
-	console.log("app food remain: " + food_remain)
 	for (var i = 0; i < size; i++) {
 		board[i] = new Array();
 		for (var j = 0; j < size; j++) {
@@ -55,15 +59,15 @@ function Start() {
 			} else if (numOfMonsters > 1 && i == size-1 && j == size-1) {
 				monster2.i = i;
 				monster2.j = j;
-				board[i][j] = 12
+				board[i][j] = 12;
 			} else if (numOfMonsters > 2 && i == 0 && j == size-1) {
 				monster3.i = i;
 				monster3.j = j;
-				board[i][j] = 12
+				board[i][j] = 12;
 			} else if (numOfMonsters > 3 && i == size-1 && j == 0) {
 				monster4.i = i;
 				monster4.j = j;
-				board[i][j] = 12
+				board[i][j] = 12;
 			//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 			} else if ( 
 				(i == 3 && j == 3) ||
@@ -100,7 +104,6 @@ function Start() {
 					shape.i = i;
 					shape.j = j;
 					pacman_remain--;
-					console.log(shape.i, shape.j)
 					board[i][j] = 5;
 				// empty cell
 				} else {
@@ -110,15 +113,36 @@ function Start() {
 			}
 		}
 	}
+	console.log("monsters: " + numOfMonsters);
+	console.log("begining: " + monsters.length);
+	monsters[0] = monster1;
+	monster1.priorValue = 0;
+		if (numOfMonsters > 1) {
+			monsters[1] = monster2;
+			monster2.priorValue = 0;
+		}
+		if (numOfMonsters > 2) {
+			monsters[2] = monster3;
+			monster3.priorValue = 0;
+		}
+		if (numOfMonsters > 3) {
+			monsters[3] = monster4;
+			monster4.priorValue = 0;
+		}
 
+	console.log("end: " + monsters.length);
 	
+	// paint monster
+	intervalMonster1 = setInterval(updateMonster, 400);
+	// monster1.priorValue = 0;
+	// intervalMonster1 = setInterval(updateMonster(), 400);
 	// paint strawberry
 	placeStrawberry();
 
 	if (pacman_remain == 1) {  // paint pacman if it wasnt painted
 		var emptyCell = findRandomEmptyCell(board);
-		bonusStrawberryShape.i = emptyCell[0];
-		bonusStrawberryShape.j = emptyCell[1];
+		shape.i = emptyCell[0];
+		shape.j = emptyCell[1];
 		pacman_remain--;
 		board[emptyCell[0]][emptyCell[1]] = 5;
 	} 
@@ -127,20 +151,17 @@ function Start() {
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 1;
 		ballPoints[0] = ballPoints[0]-1;
-		console.log("first while ball points: " + ballPoints)
 
 	}
 	while (ballPoints[1] > 0) {
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 2;
 		ballPoints[1] = ballPoints[1]-1;
-		console.log("second while ball points: " + ballPoints)
 	}
 	while (ballPoints[2] > 0) {
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 3;
 		ballPoints[2] = ballPoints[2]-1;
-		console.log("third while ball points: " + ballPoints)
 	}
 
 	setTimeout(function(){
@@ -203,7 +224,6 @@ function Draw() {
 	lblScore.value = score;
 	lblLife.value = life;
 	lblTime.value = time_elapsed;
-	console.log("game time is "+gameTime)
 	for (var i = 0; i < size; i++) {
 		for (var j = 0; j < size; j++) {
 			var center = new Object();
@@ -274,32 +294,44 @@ function Draw() {
 			else if (board[i][j] == 4) {    //wall
 				context.beginPath();
 				context.rect(center.x - 30, center.y - 30, 60, 60);
-				context.fillStyle = "grey"; //color
+				context.fillStyle = "rgb(0, 26, 255)"; //color
 				context.fill();
 			}
 			else if (board[i][j] == 9) {   //medicin
-				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "green"; //color
-				context.fill();
+				// context.beginPath();
+				// context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				// context.fillStyle = "green"; //color
+				// context.fill();
+				let img1 = new Image(3,3);
+				img1.src = "pics/heart.png";
+				context.drawImage(img1, i*60, j*60, 50, 62);
 			}
 			else if (board[i][j] == 10) {    //strawberry
-				context.beginPath();
-				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // circle
-				context.fillStyle = "gold"; //color
-				context.fill();
+				// context.beginPath();
+				// context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // circle
+				// context.fillStyle = "gold"; //color
+				// context.fill();
+				let img1 = new Image(3,3);
+				img1.src = "pics/strawberry.png";
+				context.drawImage(img1, i*60, j*60, 50, 62);
 			}
 			else if (board[i][j] == 11) {    //clock
-				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "blue"; //color
-				context.fill();
+				// context.beginPath();
+				// context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				// context.fillStyle = "blue"; //color
+				// context.fill();
+				let img1 = new Image(3,3);
+				img1.src = "pics/clock.png";
+				context.drawImage(img1, i*60, j*60, 56, 56);
 			}
 			else if (board[i][j] == 12) {    //monster
-				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "pink"; //color
-				context.fill();
+				// context.beginPath();
+				// context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				// context.fillStyle = "pink"; //color
+				// context.fill();
+				let img1 = new Image(3,3);
+				img1.src = "pics/monster.png";
+				context.drawImage(img1, i*60, j*60, 50, 62);
 			}
 		}
 	}
@@ -355,7 +387,6 @@ function UpdatePosition() {
 	}
 	else if (board[shape.i][shape.j] == 11) {    //eating clock
 		gameTime += 10;
-		console.log("changed game time: " + gameTime)
 		setTimeout(function(){
 			var emptyCell = findRandomEmptyCell(board);
 			board[emptyCell[0]][emptyCell[1]] = 11;
@@ -368,12 +399,24 @@ function UpdatePosition() {
 			for (var j = 0; j < size; j++) {
 				if (i == 0 && j == 0) {
 					board[i][j] = 12;
+					monster1.i = i;
+					monster1.j = j;
+					monster1.priorValue = 0;
 				} else if (numOfMonsters > 1 && i == size-1 && j == size-1) {
 					board[i][j] = 12
+					monster2.i = i;
+					monster2.j = j;
+					monster2.priorValue = 0;
 				} else if (numOfMonsters > 2 && i == 0 && j == size-1) {
 					board[i][j] = 12
+					monster3.i = i;
+					monster3.j = j;
+					monster3.priorValue = 0;
 				} else if (numOfMonsters > 3 && i == size-1 && j == 0) {
 					board[i][j] = 12
+					monster4.i = i;
+					monster4.j = j;
+					monster4.priorValue = 0;
 				} else if (board[i][j] == 12 || board[j][j] == lastPressed) {
 					board[i][j] = 0;
 				}
@@ -385,15 +428,13 @@ function UpdatePosition() {
 		pacman_remain--;
 		board[emptyCell[0]][emptyCell[1]] = 5;
 		lastPressed = 8;
+		window.clearInterval(intervalMonster1);
+		intervalMonster1 = setInterval(updateMonster, 400);
 	}
 
 	board[shape.i][shape.j] = lastPressed;   // continue
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
-
-	// setTimeout(walkingMonster(monster1), 1000);
-	walkingMonster(monster1);
-	board[monster1.i][monster1.j] = 12; 
 	
 
 	// game ends
@@ -404,12 +445,14 @@ function UpdatePosition() {
 		lblScore.value = score;
 		lblTime.value = time_elapsed
 		window.clearInterval(interval);
+		window.clearInterval(intervalBonusStrawberry);
 		window.alert("Game completed");
 	}
 	else if (gameTime <= time_elapsed) {
 		lblTime.value = time_elapsed
 		lblScore.value = score;
 		window.clearInterval(interval);
+		window.clearInterval(intervalBonusStrawberry);
 		if (score < 100) {
 			alert("You are better than " + score + " points!")
 		} else {

@@ -1,13 +1,7 @@
-var leftKey = 37;
-var upKey = 38;
-var rightKey = 39;
-var downKey = 40;
-var gameTime = 150;
-
 function setKey(key, e) {
     //TODO: fix
     let code = e.keyCode;
-    if (47<code<106){
+    // if (47<code<106){
         console.log(key, code)
         switch (key) {
             case 'left':
@@ -19,7 +13,7 @@ function setKey(key, e) {
             case 'down':
                 downKey = code;
         }
-    }
+    // }
 }
 
 function setBallsNum(num) {
@@ -50,6 +44,7 @@ function setgameTime(sec) {
 
 function setNumOfMonsters(num) {
     numOfMonsters = num;
+    console.log("settings num: " + numOfMonsters);
 }
 
 function setRandomSettings() {
