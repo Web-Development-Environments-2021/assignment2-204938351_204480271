@@ -148,9 +148,11 @@ function GetKeyPressed() {
 function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
+	lblLife.value = life;
 	lblTime.value = time_elapsed;
-	for (var i = 0; i < 10; i++) {
-		for (var j = 0; j < 10; j++) {
+	console.log(gameTime)
+	for (var i = 0; i < size; i++) {
+		for (var j = 0; j < size; j++) {
 			var center = new Object();
 			center.x = i * 60 + 30;
 			center.y = j * 60 + 30;
@@ -206,25 +208,31 @@ function Draw() {
 			 else if (board[i][j] == 1) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "blue"; //color
+				context.fillStyle = color5PointsBall; //color
 				context.fill();
 			} 
 			else if (board[i][j] == 2) {
 				context.beginPath(); 
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "green"; //color
+				context.fillStyle = color15PointsBall; //color
 				context.fill();
 			} 
 			else if (board[i][j] == 3) {
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				context.fillStyle = "red"; //color
+				context.fillStyle = color25PointsBall; //color
 				context.fill();
 			} 
 			else if (board[i][j] == 4) {
 				context.beginPath();
 				context.rect(center.x - 30, center.y - 30, 60, 60);
 				context.fillStyle = "grey"; //color
+				context.fill();
+			}
+			else if (board[i][j] == 9) {
+				context.beginPath();
+				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.fillStyle = "green"; //color
 				context.fill();
 			}
 		}
