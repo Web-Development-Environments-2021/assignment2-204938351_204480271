@@ -78,6 +78,7 @@ function Start() {
 				cnt--;
 			}
 		}
+		console.log(board);
 	}
 	console.log("after init ball points: " + ballPoints)
 	console.log(board);
@@ -174,11 +175,6 @@ function Draw() {
 				context.arc(center.x - 15, center.y - 5 , 5, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
-			// } else if (board[i][j] == 1212) {
-			// 	context.beginPath();
-			// 	context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-			// 	context.fillStyle = "black"; //color
-			// 	context.fill();
 			}
 			else if (board[i][j] == 6) {     //down
 				context.beginPath();
@@ -213,25 +209,28 @@ function Draw() {
 				context.fillStyle = "black"; //color
 				context.fill();
 			}
-			 else if (board[i][j] == 1) {
+			 else if (board[i][j] == 1) {     //blue ball
+				// let img1 = new Image(3,3);
+				// img1.src = "pics/";
+				// context.drawImage(img1, i*60, j*60);
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = color5PointsBall; //color
 				context.fill();
 			} 
-			else if (board[i][j] == 2) {
+			else if (board[i][j] == 2) {    //green ball
 				context.beginPath(); 
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = color15PointsBall; //color
 				context.fill();
 			} 
-			else if (board[i][j] == 3) {
+			else if (board[i][j] == 3) {    //red ball
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = color25PointsBall; //color
 				context.fill();
 			} 
-			else if (board[i][j] == 4) {
+			else if (board[i][j] == 4) {    //wall
 				context.beginPath();
 				context.rect(center.x - 30, center.y - 30, 60, 60);
 				context.fillStyle = "grey"; //color
@@ -242,6 +241,11 @@ function Draw() {
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = "green"; //color
 				context.fill();
+			}
+			else if (board[i][j] == 10) {    //strawberry
+				let img1 = new Image(3,3);
+				img1.src = "pics/strawberry.png";
+				context.drawImage(img1, i*60, j*60);
 			}
 		}
 	}
