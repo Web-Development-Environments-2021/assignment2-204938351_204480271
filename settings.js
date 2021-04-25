@@ -2,9 +2,6 @@ var leftKey = 37;
 var upKey = 38;
 var rightKey = 39;
 var downKey = 40;
-var color5PointsBall = "#e66465";
-var color15PointsBall = "FF7B33";
-var color25PointsBall = "#f6b73c"; 
 var gameTime = 150;
 var numOfMonsters = 1
 
@@ -27,12 +24,13 @@ function setKey(key, e) {
 }
 
 function setBallsNum(num) {
-    // food_remain = num;
+    food_remain = num;
+    console.log("settings food remain: " + food_remain)
     numOf5PointsBall = Math.floor(0.6*num);
     numOf15PointsBall = Math.floor(0.3*num);
     numOf25PointsBall = Math.floor(0.1*num);
     ballPoints = [numOf5PointsBall, numOf15PointsBall, numOf25PointsBall]
-    console.log(ballPoints)
+    console.log("settings ball points: " + ballPoints)
 }
 
 function setballsColor(points, color) {
