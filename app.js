@@ -4,6 +4,7 @@ var monster1 = new Object();
 var monster2 = new Object();
 var monster3 = new Object();
 var monster4 = new Object();
+var bonusStrawberryShape = new Object();
 var board;
 var life;
 var score;
@@ -108,17 +109,19 @@ function Start() {
 				cnt--;
 			}
 		}
-		console.log(board);
 	}
-	console.log("after init ball points: " + ballPoints)
-	console.log(board);
+
+	
+	// paint strawberry
+	placeStrawberry();
+
 	if (pacman_remain == 1) {  // paint pacman if it wasnt painted
 		var emptyCell = findRandomEmptyCell(board);
-		shape.i = emptyCell[0];
-		shape.j = emptyCell[1];
+		bonusStrawberryShape.i = emptyCell[0];
+		bonusStrawberryShape.j = emptyCell[1];
 		pacman_remain--;
 		board[emptyCell[0]][emptyCell[1]] = 5;
-		} 
+	} 
 	
 	while (ballPoints[0] > 0) {
 		var emptyCell = findRandomEmptyCell(board);
@@ -166,6 +169,7 @@ function Start() {
 		false
 	);
 	interval = setInterval(UpdatePosition, 200);
+	
 }
 
 function findRandomEmptyCell(board) {
@@ -250,9 +254,6 @@ function Draw() {
 				context.fill();
 			}
 			 else if (board[i][j] == 1) {     //blue ball
-				// let img1 = new Image(3,3);
-				// img1.src = "pics/";
-				// context.drawImage(img1, i*60, j*60);
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = color5PointsBall; //color
@@ -283,9 +284,10 @@ function Draw() {
 				context.fill();
 			}
 			else if (board[i][j] == 10) {    //strawberry
-				let img1 = new Image(3,3);
-				img1.src = "pics/strawberry.png";
-				context.drawImage(img1, i*60, j*60);
+				context.beginPath();
+				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // circle
+				context.fillStyle = "gold"; //color
+				context.fill();
 			}
 			else if (board[i][j] == 11) {    //clock
 				context.beginPath();
@@ -345,6 +347,11 @@ function UpdatePosition() {
 			var emptyCell = findRandomEmptyCell(board);
 			board[emptyCell[0]][emptyCell[1]] = 9;
 			}, 8000);
+	}
+	else if (board[shape.i][shape.j] == 10) {   //eating Strawberry
+		score+= 50;
+		window.clearInterval(intervalBonusStrawberry);
+		setTimeout(placeStrawberry, 4000);
 	}
 	else if (board[shape.i][shape.j] == 11) {    //eating clock
 		gameTime += 10;
