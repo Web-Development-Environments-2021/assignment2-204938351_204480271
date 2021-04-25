@@ -1,10 +1,14 @@
 function placeStrawberry() {
-	var emptyCell = findRandomEmptyCell(board);
-	bonusStrawberryShape.i = emptyCell[0];
-	bonusStrawberryShape.j = emptyCell[1];
-	board[emptyCell[0]][emptyCell[1]] = 10;
+	// var emptyCell = findRandomEmptyCell(board);
+	// bonusStrawberryShape.i = emptyCell[0];
+	// bonusStrawberryShape.j = emptyCell[1];
+	// board[emptyCell[0]][emptyCell[1]] = 10;
+    bonusStrawberryShape.i = Math.floor(size/2);
+	bonusStrawberryShape.j = Math.floor(size/2);
+    board[Math.floor(size/2)][Math.floor(size/2)] = 10;
     bonusStrawberryShape.priorValue = 0;
     intervalBonusStrawberry = setInterval(UpdateBonusStrawberry, 400);
+    console.log("floooooor:"+ Math.floor(size/2))
 }
 
 function UpdateBonusStrawberry() {

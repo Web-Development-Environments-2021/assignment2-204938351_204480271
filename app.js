@@ -13,6 +13,7 @@ var start_time;
 var time_elapsed;
 var gameTime = 150;
 var interval;
+var intervalBonusStrawberry;
 var food_remain=70;
 var numOf5PointsBall=30;
 var numOf15PointsBall=15;
@@ -26,7 +27,9 @@ var size = 13;
 var pacman_remain = 1;
 var medicine_remain = 1;
 var cnt = 100;
-var numOfMonsters = 1
+var numOfMonsters = 1;
+var themeSong = new Audio("theme.mp3");
+
 
 
 
@@ -36,22 +39,29 @@ var numOfMonsters = 1
 // });
 
 function Start() {
+	window.clearInterval(interval);
+	window.clearInterval(intervalBonusStrawberry);
+	themeSong.play();
 	board = new Array();
 	score = 0;
 	life = 5;
 	pac_color = "yellow";
 	// food_remain = setBallsNum($("#setBallsNum").val());
-	console.log(ballPoints); //TODO: delete
+	// console.log
+	(ballPoints); //TODO: delete
 	start_time = new Date();
-	console.log("app food remain: " + food_remain)
+	// console.log("app food remain: " + food_remain)
 	for (var i = 0; i < size; i++) {
 		board[i] = new Array();
 		for (var j = 0; j < size; j++) {
 			// monsters
-			if (i == 0 && j == 0) {
+			if (i == 5 && j == 5){
+				board[i][j] = 0;
+			}
+			if (i == Math.floor(size/2)&& j == Math.floor(size/2)) {
 				monster1.i = i;
 				monster1.j = j;
-				board[i][j] = 12;
+				board[Math.floor(size/2)][Math.floor(size/2)] = 0;
 			} else if (numOfMonsters > 1 && i == size-1 && j == size-1) {
 				monster2.i = i;
 				monster2.j = j;
@@ -100,7 +110,7 @@ function Start() {
 					shape.i = i;
 					shape.j = j;
 					pacman_remain--;
-					console.log(shape.i, shape.j)
+					// console.log(shape.i, shape.j)
 					board[i][j] = 5;
 				// empty cell
 				} else {
@@ -117,8 +127,8 @@ function Start() {
 
 	if (pacman_remain == 1) {  // paint pacman if it wasnt painted
 		var emptyCell = findRandomEmptyCell(board);
-		bonusStrawberryShape.i = emptyCell[0];
-		bonusStrawberryShape.j = emptyCell[1];
+		shape.i = emptyCell[0];
+		shape.j = emptyCell[1];
 		pacman_remain--;
 		board[emptyCell[0]][emptyCell[1]] = 5;
 	} 
@@ -127,20 +137,20 @@ function Start() {
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 1;
 		ballPoints[0] = ballPoints[0]-1;
-		console.log("first while ball points: " + ballPoints)
+		// console.log("first while ball points: " + ballPoints)
 
 	}
 	while (ballPoints[1] > 0) {
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 2;
 		ballPoints[1] = ballPoints[1]-1;
-		console.log("second while ball points: " + ballPoints)
+		// console.log("second while ball points: " + ballPoints)
 	}
 	while (ballPoints[2] > 0) {
 		var emptyCell = findRandomEmptyCell(board);
 		board[emptyCell[0]][emptyCell[1]] = 3;
 		ballPoints[2] = ballPoints[2]-1;
-		console.log("third while ball points: " + ballPoints)
+		// console.log("third while ball points: " + ballPoints)
 	}
 
 	setTimeout(function(){
@@ -178,7 +188,7 @@ function findRandomEmptyCell(board) {
 	while (board[i][j] != 0) {
 		i = Math.floor(Math.random() * (size-1) + 1);
 		j = Math.floor(Math.random() * (size-1) + 1);
-		console.log("help")
+		// console.log("help")
 	}
 	return [i, j];
 }
@@ -203,7 +213,7 @@ function Draw() {
 	lblScore.value = score;
 	lblLife.value = life;
 	lblTime.value = time_elapsed;
-	console.log("game time is "+gameTime)
+	// console.log("game time is "+gameTime)
 	for (var i = 0; i < size; i++) {
 		for (var j = 0; j < size; j++) {
 			var center = new Object();
@@ -355,7 +365,7 @@ function UpdatePosition() {
 	}
 	else if (board[shape.i][shape.j] == 11) {    //eating clock
 		gameTime += 10;
-		console.log("changed game time: " + gameTime)
+		// console.log("changed game time: " + gameTime)
 		setTimeout(function(){
 			var emptyCell = findRandomEmptyCell(board);
 			board[emptyCell[0]][emptyCell[1]] = 11;
@@ -404,12 +414,16 @@ function UpdatePosition() {
 		lblScore.value = score;
 		lblTime.value = time_elapsed
 		window.clearInterval(interval);
+		themeSong.pause();
+		window.clearInterval(intervalBonusStrawberry);
 		window.alert("Game completed");
 	}
 	else if (gameTime <= time_elapsed) {
 		lblTime.value = time_elapsed
 		lblScore.value = score;
 		window.clearInterval(interval);
+		themeSong.pause();
+		window.clearInterval(intervalBonusStrawberry);
 		if (score < 100) {
 			alert("You are better than " + score + " points!")
 		} else {
@@ -418,4 +432,9 @@ function UpdatePosition() {
 	} else {
 		Draw();
 	}
+}
+function forceStop(){
+	clearInterval(interval);
+	themeSong.pause();
+	clearInterval(intervalBonusStrawberry);
 }

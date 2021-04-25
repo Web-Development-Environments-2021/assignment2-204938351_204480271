@@ -2,6 +2,8 @@ function logIn() {
     if (isValidLogin()) {
         loginForm.reset();
         show(login, settings);
+        loggedIn = true;
+        document.getElementById("playBtn").display=true;
         // menuClickShow(settings)
     }
     else {
