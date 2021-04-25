@@ -220,8 +220,6 @@ function Draw() {
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = "red"; //color
 				context.fill();
-
-
 			} 
 			else if (board[i][j] == 4) {
 				context.beginPath();
