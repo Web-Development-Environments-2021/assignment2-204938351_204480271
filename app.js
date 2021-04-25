@@ -24,7 +24,6 @@ function Start() {
 	pac_color = "yellow";
 	var cnt = 100;
 	// food_remain = setBallsNum($("#setBallsNum").val());
-	console.log(food_remain); //TODO: delete
 	var pacman_remain = 1;
 	start_time = new Date();
 	for (var i = 0; i < 10; i++) {
@@ -56,18 +55,14 @@ function Start() {
 					// console.log(pacman_remain)
 					board[i][j] = 5;
 				} else {
-					console.log('third:' + randomNum);
+					// console.log('third:' + randomNum);
 					board[i][j] = 0;
 				}
 				cnt--;
 			}
 		}
+		console.log(board);
 	}
-	// while (food_remain > 0) {
-	// 	var emptyCell = findRandomEmptyCell(board);
-	// 	board[emptyCell[0]][emptyCell[1]] = 1212;
-	// 	food_remain--;
-	// }
 	
 	while (ballPoints[0] > 0) {
 		var emptyCell = findRandomEmptyCell(board);
@@ -147,11 +142,6 @@ function Draw() {
 				context.arc(center.x - 15, center.y - 5 , 5, 0, 2 * Math.PI); // circle
 				context.fillStyle = "black"; //color
 				context.fill();
-			// } else if (board[i][j] == 1212) {
-			// 	context.beginPath();
-			// 	context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-			// 	context.fillStyle = "black"; //color
-			// 	context.fill();
 			}
 			else if (board[i][j] == 6) {     //down
 				context.beginPath();
@@ -186,31 +176,37 @@ function Draw() {
 				context.fillStyle = "black"; //color
 				context.fill();
 			}
-			 else if (board[i][j] == 1) {
+			 else if (board[i][j] == 1) {     //blue ball
+				// let img1 = new Image(3,3);
+				// img1.src = "pics/";
+				// context.drawImage(img1, i*60, j*60);
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = "blue"; //color
 				context.fill();
 			} 
-			else if (board[i][j] == 2) {
+			else if (board[i][j] == 2) {    //green ball
 				context.beginPath(); 
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = "green"; //color
 				context.fill();
 			} 
-			else if (board[i][j] == 3) {
+			else if (board[i][j] == 3) {    //red ball
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = "red"; //color
 				context.fill();
-
-
 			} 
-			else if (board[i][j] == 4) {
+			else if (board[i][j] == 4) {    //wall
 				context.beginPath();
 				context.rect(center.x - 30, center.y - 30, 60, 60);
 				context.fillStyle = "grey"; //color
 				context.fill();
+			}
+			else if (board[i][j] == 9) {    //strawberry
+				let img1 = new Image(3,3);
+				img1.src = "pics/strawberry.png";
+				context.drawImage(img1, i*60, j*60);
 			}
 		}
 	}
