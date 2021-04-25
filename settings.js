@@ -3,7 +3,6 @@ var upKey = 38;
 var rightKey = 39;
 var downKey = 40;
 var gameTime = 150;
-var numOfMonsters = 1
 
 function setKey(key, e) {
     //TODO: fix

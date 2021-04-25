@@ -1,14 +1,18 @@
 var context;
 var shape = new Object();
+var monster1 = new Object();
+var monster2 = new Object();
+var monster3 = new Object();
+var monster4 = new Object();
 var board;
 var life;
 var score;
 var pac_color;
 var start_time;
 var time_elapsed;
-var gameTime = 60;
+var gameTime = 150;
 var interval;
-var food_remain=50;
+var food_remain=70;
 var numOf5PointsBall=30;
 var numOf15PointsBall=15;
 var numOf25PointsBall=5;
@@ -17,10 +21,12 @@ var color5PointsBall = "#e66465";
 var color15PointsBall = "#e63468";
 var color25PointsBall = "#f6b73c";
 var lastPressed=8; //pacman always looks to the right 
-var size = 15;
+var size = 13;
 var pacman_remain = 1;
 var medicine_remain = 1;
 var cnt = 100;
+var numOfMonsters = 1
+
 
 
 // $(document).ready(function() {
@@ -39,12 +45,26 @@ function Start() {
 	console.log("app food remain: " + food_remain)
 	for (var i = 0; i < size; i++) {
 		board[i] = new Array();
-		//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
 		for (var j = 0; j < size; j++) {
+			// monsters
 			if (i == 0 && j == 0) {
-				board[i][j] = 9
-			}
-			else if (
+				monster1.i = i;
+				monster1.j = j;
+				board[i][j] = 12;
+			} else if (numOfMonsters > 1 && i == size-1 && j == size-1) {
+				monster2.i = i;
+				monster2.j = j;
+				board[i][j] = 12
+			} else if (numOfMonsters > 2 && i == 0 && j == size-1) {
+				monster3.i = i;
+				monster3.j = j;
+				board[i][j] = 12
+			} else if (numOfMonsters > 3 && i == size-1 && j == 0) {
+				monster4.i = i;
+				monster4.j = j;
+				board[i][j] = 12
+			//put obstacles in (i=3,j=3) and (i=3,j=4) and (i=3,j=5), (i=6,j=1) and (i=6,j=2)
+			} else if ( 
 				(i == 3 && j == 3) ||
 				(i == 3 && j == 4) ||
 				(i == 3 && j == 5) ||
@@ -52,18 +72,28 @@ function Start() {
 				(i == 6 && j == 2)
 			) {
 				board[i][j] = 4;
+			//balls and walls
 			} else {
 				var randomNum = Math.random();
 				if (randomNum <= (1.0 * food_remain) / cnt) {
 					// console.log('first: rand=' + randomNum + '<= ' + (1.0 * food_remain) / cnt)
 					food_remain--;
 					// console.log(food_remain);
-					var randomBall = Math.floor(Math.random()*3)+1
-					if (ballPoints[randomBall-1] > 0) {
-						console.log("random randomball " + randomBall)
-						board[i][j] = randomBall;
-						ballPoints[randomBall-1] = ballPoints[randomBall-1] - 1;
+					// var randomBall = Math.floor(Math.random()*3)+1
+					// if (ballPoints[randomBall-1] > 0) {
+					// 	console.log("random randomball " + randomBall)
+					// 	board[i][j] = randomBall;
+					// 	ballPoints[randomBall-1] = ballPoints[randomBall-1] - 1;
+					// }
+					var randomObject = Math.floor(Math.random()*4)+1
+					if (randomObject == 4) {  // wall
+						board[i][j] = randomObject;
 					}
+					else if (ballPoints[randomObject-1] > 0) {  // ball
+						board[i][j] = randomObject;
+						ballPoints[randomObject-1] = ballPoints[randomObject-1] - 1;
+					}
+				// pacman
 				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
 					// console.log('second: rand=' + randomNum + '<' + (1.0 * (pacman_remain + food_remain)) / cnt);
 					shape.i = i;
@@ -71,8 +101,8 @@ function Start() {
 					pacman_remain--;
 					console.log(shape.i, shape.j)
 					board[i][j] = 5;
+				// empty cell
 				} else {
-					// console.log('third:' + randomNum);
 					board[i][j] = 0;
 				}
 				cnt--;
@@ -109,6 +139,16 @@ function Start() {
 		ballPoints[2] = ballPoints[2]-1;
 		console.log("third while ball points: " + ballPoints)
 	}
+
+	setTimeout(function(){
+		var emptyCell = findRandomEmptyCell(board);
+		board[emptyCell[0]][emptyCell[1]] = 9;  // paint medicin
+		}, 4000);
+
+	setTimeout(function(){
+		var emptyCell = findRandomEmptyCell(board);
+		board[emptyCell[0]][emptyCell[1]] = 11;  // paint clock
+		}, 10000);
 
 	keysDown = {};
 	addEventListener(
@@ -159,7 +199,7 @@ function Draw() {
 	lblScore.value = score;
 	lblLife.value = life;
 	lblTime.value = time_elapsed;
-	console.log(gameTime)
+	console.log("game time is "+gameTime)
 	for (var i = 0; i < size; i++) {
 		for (var j = 0; j < size; j++) {
 			var center = new Object();
@@ -236,7 +276,7 @@ function Draw() {
 				context.fillStyle = "grey"; //color
 				context.fill();
 			}
-			else if (board[i][j] == 9) {
+			else if (board[i][j] == 9) {   //medicin
 				context.beginPath();
 				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
 				context.fillStyle = "green"; //color
@@ -246,6 +286,18 @@ function Draw() {
 				let img1 = new Image(3,3);
 				img1.src = "pics/strawberry.png";
 				context.drawImage(img1, i*60, j*60);
+			}
+			else if (board[i][j] == 11) {    //clock
+				context.beginPath();
+				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.fillStyle = "blue"; //color
+				context.fill();
+			}
+			else if (board[i][j] == 12) {    //monster
+				context.beginPath();
+				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.fillStyle = "pink"; //color
+				context.fill();
 			}
 		}
 	}
@@ -278,7 +330,7 @@ function UpdatePosition() {
 		}
 		lastPressed = 8;
 	}
-	if (board[shape.i][shape.j] == 1) {   //TODO: Make sure the score addition matches the color of the ball
+	if (board[shape.i][shape.j] == 1) {   //eating balls
 		score+= 5;
 	}
 	else if (board[shape.i][shape.j] == 2) {
@@ -287,14 +339,57 @@ function UpdatePosition() {
 	else if (board[shape.i][shape.j] == 3) {
 		score+= 25;
 	}
-	else if (board[shape.i][shape.j] == 9) {
-		life += 1;
-		var emptyCell = findRandomEmptyCell(board);
-		board[emptyCell[0]][emptyCell[1]] = 9;
+	else if (board[shape.i][shape.j] == 9) {   //eating medicin
+		life++;
+		setTimeout(function(){
+			var emptyCell = findRandomEmptyCell(board);
+			board[emptyCell[0]][emptyCell[1]] = 9;
+			}, 8000);
 	}
-	board[shape.i][shape.j] = lastPressed;
+	else if (board[shape.i][shape.j] == 11) {    //eating clock
+		gameTime += 10;
+		console.log("changed game time: " + gameTime)
+		setTimeout(function(){
+			var emptyCell = findRandomEmptyCell(board);
+			board[emptyCell[0]][emptyCell[1]] = 11;
+			}, 10000);
+	}
+	else if (board[shape.i][shape.j] == 12) { // monster eats pacmen
+		life--;
+		score -= 10;
+		for (var i = 0; i < size; i++) {
+			for (var j = 0; j < size; j++) {
+				if (i == 0 && j == 0) {
+					board[i][j] = 12;
+				} else if (numOfMonsters > 1 && i == size-1 && j == size-1) {
+					board[i][j] = 12
+				} else if (numOfMonsters > 2 && i == 0 && j == size-1) {
+					board[i][j] = 12
+				} else if (numOfMonsters > 3 && i == size-1 && j == 0) {
+					board[i][j] = 12
+				} else if (board[i][j] == 12 || board[j][j] == lastPressed) {
+					board[i][j] = 0;
+				}
+			}
+		}
+		var emptyCell = findRandomEmptyCell(board);
+		shape.i = emptyCell[0];
+		shape.j = emptyCell[1];
+		pacman_remain--;
+		board[emptyCell[0]][emptyCell[1]] = 5;
+		lastPressed = 8;
+	}
+
+	board[shape.i][shape.j] = lastPressed;   // continue
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
+
+	// setTimeout(walkingMonster(monster1), 1000);
+	walkingMonster(monster1);
+	board[monster1.i][monster1.j] = 12; 
+	
+
+	// game ends
 	if (score >= 2000 && time_elapsed <= 1000) {  //TODO: what?
 		pac_color = "green";
 	}
@@ -313,11 +408,6 @@ function UpdatePosition() {
 		} else {
 			alert("Winner")
 		}
-	// } else if (gameTime <= time_elapsed && score < 100) {
-	// 	lblTime.value = time_elapsed
-	// 	lblScore.value = score;
-	// 	window.clearInterval(interval);
-	// 	alert("You are better than " + score + " points!")
 	} else {
 		Draw();
 	}
