@@ -14,6 +14,7 @@ var start_time;
 var time_elapsed;
 var gameTime = 150;
 var interval;
+var intervalBonusStrawberry;
 var food_remain=70;
 var numOf5PointsBall=30;
 var numOf15PointsBall=15;
@@ -33,6 +34,9 @@ var upKey = 38;
 var rightKey = 39;
 var downKey = 40;
 var gameTime = 150;
+var numOfMonsters = 1;
+var themeSong = new Audio("theme.mp3");
+
 
 
 
@@ -42,6 +46,9 @@ var gameTime = 150;
 // });
 
 function Start() {
+	window.clearInterval(interval);
+	window.clearInterval(intervalBonusStrawberry);
+	themeSong.play();
 	board = new Array();
 	score = 0;
 	life = 5;
@@ -52,10 +59,13 @@ function Start() {
 		board[i] = new Array();
 		for (var j = 0; j < size; j++) {
 			// monsters
-			if (i == 0 && j == 0) {
+			if (i == 5 && j == 5){
+				board[i][j] = 0;
+			}
+			if (i == Math.floor(size/2)&& j == Math.floor(size/2)) {
 				monster1.i = i;
 				monster1.j = j;
-				board[i][j] = 12;
+				board[Math.floor(size/2)][Math.floor(size/2)] = 0;
 			} else if (numOfMonsters > 1 && i == size-1 && j == size-1) {
 				monster2.i = i;
 				monster2.j = j;
@@ -199,7 +209,7 @@ function findRandomEmptyCell(board) {
 	while (board[i][j] != 0) {
 		i = Math.floor(Math.random() * (size-1) + 1);
 		j = Math.floor(Math.random() * (size-1) + 1);
-		console.log("help")
+		// console.log("help")
 	}
 	return [i, j];
 }
@@ -445,6 +455,7 @@ function UpdatePosition() {
 		lblScore.value = score;
 		lblTime.value = time_elapsed
 		window.clearInterval(interval);
+		themeSong.pause();
 		window.clearInterval(intervalBonusStrawberry);
 		window.alert("Game completed");
 	}
@@ -452,6 +463,7 @@ function UpdatePosition() {
 		lblTime.value = time_elapsed
 		lblScore.value = score;
 		window.clearInterval(interval);
+		themeSong.pause();
 		window.clearInterval(intervalBonusStrawberry);
 		if (score < 100) {
 			alert("You are better than " + score + " points!")
@@ -461,4 +473,9 @@ function UpdatePosition() {
 	} else {
 		Draw();
 	}
+}
+function forceStop(){
+	clearInterval(interval);
+	themeSong.pause();
+	clearInterval(intervalBonusStrawberry);
 }

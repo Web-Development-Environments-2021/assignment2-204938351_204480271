@@ -58,6 +58,7 @@
 			<!-- <img src="pics/pacmanLogo.png"> -->
 			<button class="menuBut" onclick="show(welcome, login)">Login</button>
 			<button class="menuBut" onclick="show(welcome, register)">Register</button>
+			<button id="playBtn" class="menuBut" display="none" onclick="show(welcome, app)">play</button>
 		</div>
 
 		<div id="register" style="display: none" align=center>
@@ -143,6 +144,14 @@
 			toShow.style.display="block"
 		}
 		function menuClickShow(pressedOption){
+			console.log(loggedIn);
+			if(pressedOption==settings && loggedIn == false){
+				pressedOption = login;
+				document.getElementById("loginError").innerHTML = "Please Log in";
+			}
+			if(pressedOption==welcome && app.style.display=="block"){
+				forceStop()
+			}
 			pressedOption.style.display="block"
 			if (pressedOption != welcome){
 				welcome.style.display="none"
@@ -175,6 +184,25 @@
 				});
 			}
 		}
+	// var themeSong = new Audio("theme.mp3");
+	// function startMusic() {
+		
+	// 	themeSong.play();
+	// }
+	// function sound(src) {
+	// 	this.sound = document.createElement("audio");
+	// 	this.sound.src = src;
+	// 	this.sound.setAttribute("preload", "auto");
+	// 	this.sound.setAttribute("controls", "none");
+	// 	this.sound.style.display = "none";
+	// 	document.body.appendChild(this.sound);
+	// 	this.play = function(){
+	// 		this.sound.play();
+	// 	}
+	// 	this.stop = function(){
+	// 		this.sound.pause();
+	// 	}    
+	// }
 	</script>
 
 
