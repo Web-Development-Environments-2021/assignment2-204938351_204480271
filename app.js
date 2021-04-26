@@ -15,6 +15,7 @@ var time_elapsed;
 var gameTime = 150;
 var interval;
 var intervalBonusStrawberry;
+var intervalMonsters;
 var food_remain=70;
 var numOf5PointsBall=30;
 var numOf15PointsBall=15;
@@ -28,7 +29,6 @@ var size = 13;
 var pacman_remain = 1;
 var medicine_remain = 1;
 var cnt = 100;
-var numOfMonsters = 1
 var leftKey = 37;
 var upKey = 38;
 var rightKey = 39;
@@ -48,6 +48,7 @@ var themeSong = new Audio("theme.mp3");
 function Start() {
 	window.clearInterval(interval);
 	window.clearInterval(intervalBonusStrawberry);
+	window.clearInterval(intervalMonsters);
 	themeSong.play();
 	board = new Array();
 	score = 0;
@@ -58,14 +59,14 @@ function Start() {
 	for (var i = 0; i < size; i++) {
 		board[i] = new Array();
 		for (var j = 0; j < size; j++) {
-			// monsters
-			if (i == 5 && j == 5){
-				board[i][j] = 0;
-			}
+			// strawberry
 			if (i == Math.floor(size/2)&& j == Math.floor(size/2)) {
+				board[Math.floor(size/2)][Math.floor(size/2)] = 0;
+			// monsters
+			} if (numOfMonsters == 1 && i == 0 && j == 0){
 				monster1.i = i;
 				monster1.j = j;
-				board[Math.floor(size/2)][Math.floor(size/2)] = 0;
+				board[i][j] = 12;
 			} else if (numOfMonsters > 1 && i == size-1 && j == size-1) {
 				monster2.i = i;
 				monster2.j = j;
@@ -100,7 +101,7 @@ function Start() {
 					// 	board[i][j] = randomBall;
 					// 	ballPoints[randomBall-1] = ballPoints[randomBall-1] - 1;
 					// }
-					var randomObject = Math.floor(Math.random()*4)+1
+					var randomObject = Math.floor(Math.random()*3)+1
 					if (randomObject == 4) {  // wall
 						board[i][j] = randomObject;
 					}
@@ -143,9 +144,9 @@ function Start() {
 	console.log("end: " + monsters.length);
 	
 	// paint monster
-	intervalMonster1 = setInterval(updateMonster, 400);
+	intervalMonsters = setInterval(updateMonster, 400);
 	// monster1.priorValue = 0;
-	// intervalMonster1 = setInterval(updateMonster(), 400);
+	// intervalMonsters = setInterval(updateMonster(), 400);
 	// paint strawberry
 	placeStrawberry();
 
@@ -438,8 +439,8 @@ function UpdatePosition() {
 		pacman_remain--;
 		board[emptyCell[0]][emptyCell[1]] = 5;
 		lastPressed = 8;
-		window.clearInterval(intervalMonster1);
-		intervalMonster1 = setInterval(updateMonster, 400);
+		window.clearInterval(intervalMonsters);
+		intervalMonsters = setInterval(updateMonster, 400);
 	}
 
 	board[shape.i][shape.j] = lastPressed;   // continue
