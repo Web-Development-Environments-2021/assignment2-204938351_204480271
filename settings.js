@@ -48,23 +48,31 @@ function setgameTime(sec) {
 
 function setNumOfMonsters(num) {
     numOfMonsters = num;
-    console.log("settings num: " + numOfMonsters);
+    // console.log("settings num: " + numOfMonsters);
 }
 
 function setRandomSettings() {
-    setBallsNum(Math.floor(Math.random()*41)+50);
-    setballsColor(5, setRandomColor());
-    setballsColor(15, setRandomColor());
-    setballsColor(25, setRandomColor());
-    setgameTime(Math.floor(Math.random()*241)+60);
-    setNumOfMonsters(Math.floor(Math.random()*4)+1);
+    const ballsNum = Math.floor(Math.random()*41)+50;
+    const randColor5 = setRandomColor();
+    const randColor15 = setRandomColor();
+    const randColor25 = setRandomColor();
+    const randGameTime = Math.floor(Math.random()*241)+60;
+    const randMonstersNum = Math.floor(Math.random()*4)+1
+    setBallsNum(ballsNum);
+    setballsColor(5, randColor5);
+    setballsColor(15, randColor15);
+    setballsColor(25, randColor25);
+    setgameTime(randGameTime);
+    setNumOfMonsters(randMonstersNum);
+    play();
 }
 
 function setRandomColor() {
-    var letters = '0123456789ABCDEF';
-    var hashtag = '#';
-    for (var i = 0; i < 6; i++) {
-        randomColor = hashtag + letters[Math.floor(Math.random() * 16)];
+    let letters = ['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'];
+    let hashtag = '#';
+    let randomColor = hashtag;
+    for (let i = 0; i < 6; i++) {
+        randomColor += letters[Math.floor(Math.random() * 16)];
     }
     return randomColor; 
 }
