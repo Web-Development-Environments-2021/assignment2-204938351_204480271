@@ -12,6 +12,7 @@ var score;
 var pac_color;
 var start_time;
 var time_elapsed;
+var timer_time;
 var gameTime = 150;
 var interval;
 var intervalBonusStrawberry;
@@ -36,6 +37,7 @@ var downKey = 40;
 var gameTime = 150;
 var numOfMonsters = 1;
 var themeSong = new Audio("theme.mp3");
+var newGame = false;
 
 
 
@@ -46,6 +48,7 @@ var themeSong = new Audio("theme.mp3");
 // });
 
 function Start() {
+	console.log("here");
 	window.clearInterval(interval);
 	window.clearInterval(intervalBonusStrawberry);
 	window.clearInterval(intervalMonsters);
@@ -63,7 +66,7 @@ function Start() {
 			if (i == Math.floor(size/2)&& j == Math.floor(size/2)) {
 				board[Math.floor(size/2)][Math.floor(size/2)] = 0;
 			// monsters
-			} if (numOfMonsters == 1 && i == 0 && j == 0){
+			} if (numOfMonsters >= 1 && i == 0 && j == 0){
 				monster1.i = i;
 				monster1.j = j;
 				board[i][j] = 12;
@@ -124,8 +127,8 @@ function Start() {
 			}
 		}
 	}
-	console.log("monsters: " + numOfMonsters);
-	console.log("begining: " + monsters.length);
+	// console.log("monsters: " + numOfMonsters);
+	// console.log("begining: " + monsters.length);
 	monsters[0] = monster1;
 	monster1.priorValue = 0;
 		if (numOfMonsters > 1) {
@@ -141,7 +144,7 @@ function Start() {
 			monster4.priorValue = 0;
 		}
 
-	console.log("end: " + monsters.length);
+	// console.log("end: " + monsters.length);
 	
 	// paint monster
 	intervalMonsters = setInterval(updateMonster, 400);
@@ -234,7 +237,7 @@ function Draw() {
 	canvas.width = canvas.width; //clean board
 	lblScore.value = score;
 	lblLife.value = life;
-	lblTime.value = time_elapsed;
+	lblTime.value = timer_time;
 	for (var i = 0; i < size; i++) {
 		for (var j = 0; j < size; j++) {
 			var center = new Object();
@@ -309,40 +312,24 @@ function Draw() {
 				context.fill();
 			}
 			else if (board[i][j] == 9) {   //medicin
-				// context.beginPath();
-				// context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				// context.fillStyle = "green"; //color
-				// context.fill();
-				let img1 = new Image(3,3);
-				img1.src = "pics/heart.png";
-				context.drawImage(img1, i*60, j*60, 50, 62);
+				let medicinImg = new Image(3,3);
+				medicinImg.src = "pics/heart.png";
+				context.drawImage(medicinImg, i*60, j*60, 50, 62);
 			}
 			else if (board[i][j] == 10) {    //strawberry
-				// context.beginPath();
-				// context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // circle
-				// context.fillStyle = "gold"; //color
-				// context.fill();
-				let img1 = new Image(3,3);
-				img1.src = "pics/strawberry.png";
-				context.drawImage(img1, i*60, j*60, 50, 62);
+				let strawberryImg = new Image(3,3);
+				strawberryImg.src = "pics/strawberry.png";
+				context.drawImage(strawberryImg, i*60, j*60, 50, 62);
 			}
 			else if (board[i][j] == 11) {    //clock
-				// context.beginPath();
-				// context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				// context.fillStyle = "blue"; //color
-				// context.fill();
-				let img1 = new Image(3,3);
-				img1.src = "pics/clock.png";
-				context.drawImage(img1, i*60, j*60, 56, 56);
+				let clockImg = new Image(3,3);
+				clockImg.src = "pics/clock.png";
+				context.drawImage(clockImg, i*60, j*60, 56, 56);
 			}
 			else if (board[i][j] == 12) {    //monster
-				// context.beginPath();
-				// context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
-				// context.fillStyle = "pink"; //color
-				// context.fill();
-				let img1 = new Image(3,3);
-				img1.src = "pics/monster.png";
-				context.drawImage(img1, i*60, j*60, 50, 62);
+				let monsterImg = new Image(3,3);
+				monsterImg.src = "pics/monster.png";
+				context.drawImage(monsterImg, i*60, j*60, 50, 62);
 			}
 		}
 	}
@@ -350,6 +337,9 @@ function Draw() {
 
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
+	if(newGame == true) {
+		Draw();
+	}
 	var x = GetKeyPressed();
 	if (x == 5) {   //up
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
@@ -404,79 +394,98 @@ function UpdatePosition() {
 			}, 10000);
 	}
 	else if (board[shape.i][shape.j] == 12) { // monster eats pacmen
-		life--;
-		score -= 10;
-		for (var i = 0; i < size; i++) {
-			for (var j = 0; j < size; j++) {
-				if (i == 0 && j == 0) {
-					board[i][j] = 12;
-					monster1.i = i;
-					monster1.j = j;
-					monster1.priorValue = 0;
-				} else if (numOfMonsters > 1 && i == size-1 && j == size-1) {
-					board[i][j] = 12
-					monster2.i = i;
-					monster2.j = j;
-					monster2.priorValue = 0;
-				} else if (numOfMonsters > 2 && i == 0 && j == size-1) {
-					board[i][j] = 12
-					monster3.i = i;
-					monster3.j = j;
-					monster3.priorValue = 0;
-				} else if (numOfMonsters > 3 && i == size-1 && j == 0) {
-					board[i][j] = 12
-					monster4.i = i;
-					monster4.j = j;
-					monster4.priorValue = 0;
-				} else if (board[i][j] == 12 || board[j][j] == lastPressed) {
-					board[i][j] = 0;
-				}
-			}
-		}
-		var emptyCell = findRandomEmptyCell(board);
-		shape.i = emptyCell[0];
-		shape.j = emptyCell[1];
-		pacman_remain--;
-		board[emptyCell[0]][emptyCell[1]] = 5;
-		lastPressed = 8;
-		window.clearInterval(intervalMonsters);
-		intervalMonsters = setInterval(updateMonster, 400);
+		monsterEatsPacman();
 	}
 
 	board[shape.i][shape.j] = lastPressed;   // continue
 	var currentTime = new Date();
 	time_elapsed = (currentTime - start_time) / 1000;
+	timer_time = Math.floor(gameTime-time_elapsed);
 	
 
-	// game ends
-	if (score >= 2000 && time_elapsed <= 1000) {  //TODO: what?
+	// pacman turns green 10 sec before game ends
+	if (score >= 20 && timer_time <= 10) {
 		pac_color = "green";
 	}
-	if (score == 500) { //TODO: where?
+	// if (score == 500) { //TODO: where?
+	// 	lblScore.value = score;
+	// 	lblTime.value = timer_time;
+	// 	themeSong.pause();
+	// 	window.clearInterval(interval);
+	// 	window.clearInterval(intervalBonusStrawberry);
+	// 	window.clearInterval(intervalMonsters);
+	// 	window.alert("Game completed");
+	// }
+	// time is up
+	else if (timer_time <= 0) {
+		lblTime.value = 0
 		lblScore.value = score;
-		lblTime.value = time_elapsed
-		window.clearInterval(interval);
+		lblLife.value = life;
 		themeSong.pause();
-		window.clearInterval(intervalBonusStrawberry);
-		window.alert("Game completed");
-	}
-	else if (gameTime <= time_elapsed) {
-		lblTime.value = time_elapsed
-		lblScore.value = score;
 		window.clearInterval(interval);
-		themeSong.pause();
 		window.clearInterval(intervalBonusStrawberry);
+		window.clearInterval(intervalMonsters);
 		if (score < 100) {
-			alert("You are better than " + score + " points!")
+			setTimeout(function() {alert("You are better than " + score + " points!")}, 300);
 		} else {
-			alert("Winner")
+			setTimeout(function() {alert("Winner!!!")}, 300);
 		}
+	// pacman is dead
+	} else if (life <= 0){
+		lblTime.value = timer_time;
+		lblScore.value = score;
+		lblLife.value = life;
+		themeSong.pause();
+		window.clearInterval(interval);
+		window.clearInterval(intervalBonusStrawberry);
+		window.clearInterval(intervalMonsters);
+		setTimeout(function() {alert("Loser!")}, 300);
 	} else {
 		Draw();
 	}
 }
-function forceStop(){
-	clearInterval(interval);
+
+
+function StartNewGame(){
 	themeSong.pause();
-	clearInterval(intervalBonusStrawberry);
+	window.clearInterval(interval);
+	window.clearInterval(intervalBonusStrawberry);
+	window.clearInterval(intervalMonsters);
+	reset();
+	newGame = true;
+	menuClickShow(settings);
+}
+
+
+function reset() {
+	shape = new Object();
+	monster1 = new Object();
+	monster2 = new Object();
+	monster3 = new Object();
+	monster4 = new Object();
+	monsters = new Array();
+	bonusStrawberryShape = new Object();
+	// life = 5;
+	// score = 0;
+	gameTime = 150;
+	food_remain=70;
+	numOf5PointsBall=30;
+	numOf15PointsBall=15;
+	numOf25PointsBall=5;
+	ballPoints = [numOf5PointsBall, numOf15PointsBall, numOf25PointsBall]
+	color5PointsBall = "#e66465";
+	color15PointsBall = "#e63468";
+	color25PointsBall = "#f6b73c";
+	lastPressed=8; //pacman always looks to the right 
+	size = 13;
+	pacman_remain = 1;
+	medicine_remain = 1;
+	cnt = 100;
+	leftKey = 37;
+	upKey = 38;
+	rightKey = 39;
+	downKey = 40;
+	gameTime = 150;
+	numOfMonsters = 1;
+	themeSong = new Audio("theme.mp3");
 }

@@ -1,17 +1,51 @@
-function isValidMove(i, j) {
-    console.log(i, j);
-    let inBoard = 0 <= i && i < size-1 && 0 <= j && j < size-1;
-    console.log(inBoard);
+function monsterEatsPacman() {
+    life--;
+    score -= 10;
+    for (var i = 0; i < size; i++) {
+        for (var j = 0; j < size; j++) {
+            if (i == 0 && j == 0) {
+                board[i][j] = 12;
+                monster1.i = i;
+                monster1.j = j;
+                monster1.priorValue = 0;
+            } else if (numOfMonsters > 1 && i == size-1 && j == size-1) {
+                board[i][j] = 12
+                monster2.i = i;
+                monster2.j = j;
+                monster2.priorValue = 0;
+            } else if (numOfMonsters > 2 && i == 0 && j == size-1) {
+                board[i][j] = 12
+                monster3.i = i;
+                monster3.j = j;
+                monster3.priorValue = 0;
+            } else if (numOfMonsters > 3 && i == size-1 && j == 0) {
+                board[i][j] = 12
+                monster4.i = i;
+                monster4.j = j;
+                monster4.priorValue = 0;
+            } else if (board[i][j] == 12 || board[j][j] == lastPressed) {
+                board[i][j] = 0;
+            }
+        }
+    }
+    var emptyCell = findRandomEmptyCell(board);
+    shape.i = emptyCell[0];
+    shape.j = emptyCell[1];
+    pacman_remain--;
+    board[emptyCell[0]][emptyCell[1]] = 5;
+    lastPressed = 8;
+    window.clearInterval(intervalMonsters);
+    intervalMonsters = setInterval(updateMonster, 400);
+}
 
+
+function isValidMove(i, j) {
+    let inBoard = 0 <= i && i <= size-1 && 0 <= j && j <= size-1;
     if (inBoard) {
         let notWall = board[i][j] !== 4;
         let notMedicin = board[i][j] !== 9;
         let notStrawberry = board[i][j] !== 10;
         let notMonster = board[i][j] !== 12;
-        console.log(notWall);
-        console.log(notMedicin);
-        console.log(notStrawberry);
-        console.log(notMonster);
         return notWall && notMedicin && notStrawberry && notMonster;
     }
     return false;
@@ -116,64 +150,14 @@ function updateMonster() {
                 }
             }  
         }
-        board[monsters[m].i][monsters[m].j] = 12;
+        if (board[monsters[m].i][monsters[m].j] == lastPressed) { // monster eats pacmen
+            board[monsters[m].i][monsters[m].j] = 0;
+            monsterEatsPacman();
+        }
+        else {
+            board[monsters[m].i][monsters[m].j] = 12;
+        }
     } 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// function updateMonster() {
-//     for (var m = 0; m < monsters.length; m++) {
-//         let randomDirection = Math.floor(Math.random() * 4)+1;
-//         board[monsters[m].i][monsters[m].j] = monsters[m].priorValue;
-//         if (randomDirection == 1) {   //up
-//             let i = monsters[m].i;
-//             let j = monsters[m].j-1;
-//             if (isValidMove(i, j)) {
-//                 monsters[m].priorValue = board[monsters[m].i][monsters[m].j - 1];
-//                 monsters[m].j = monsters[m].j - 1;
-//             }
-//         }
-//         if (randomDirection == 2) {   //down
-//             let i = monsters[m].i;
-//             let j = monsters[m].j+1;
-//             if (isValidMove(i, j)) {
-//                 monsters[m].priorValue = board[monsters[m].i][monsters[m].j + 1];
-//                 monsters[m].j = monsters[m].j + 1;
-//             }
-//         }
-//         if (randomDirection == 3) {    //left
-//             let i = monsters[m].i-1;
-//             let j = monsters[m].j;
-//             if (isValidMove(i, j)) {
-//                 monsters[m].priorValue = board[monsters[m].i- 1][monsters[m].j];
-//                 monsters[m].i = monsters[m].i - 1;
-//             }
-//         }
-//         if (randomDirection == 4) {    //right
-//             let i = monsters[m].i+1;
-//             let j = monsters[m].j;
-//             if (isValidMove(i, j)) {
-//                 monsters[m].priorValue = board[monsters[m].i + 1][monsters[m].j];
-//                 monsters[m].i = monsters[m].i + 1;
-                
-//             }
-//         }
-//         board[monsters[m].i][monsters[m].j] = 12;
-//     }
-// }
-
 
 

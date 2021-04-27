@@ -14,7 +14,7 @@
 	<div id= "menu"class="topnav">
 		<a class="btn active" onclick="menuClickShow(welcome)">Main Menu</a>
 		<a class="btn" onclick="menuClickShow(settings)">Settings</a>
-		<a onclick="openDialog(),closeModal();" href="#about">About</a>
+		<a onclick="openModalDialog(),closeModalDialog();" href='#'>About</a>
 		<p id="helloUsername">Hello, Guest</p>
 	  </div>
 
@@ -31,7 +31,6 @@
 		</div>
 
 	</div>
-
 
 	<body>
 		<div id="app" style="display: none" align=center>
@@ -50,6 +49,7 @@
 			<div id="game">
 				<canvas id="canvas" height="780" width="780"></canvas>
 			</div>
+			<button class="newGameBtn" onclick="StartNewGame()">New Game</button>
 		</div>
 
 		<div id="welcome" style="display: block" align=center>
@@ -94,7 +94,6 @@
 			<input type="text" id="keyUp" placeholder="up" onkeydown="setKey('up', event)" maxlength="1"><br>
 			<input type="text" id="keyRight" placeholder="right" onkeydown="setKey('right', event)" maxlength="1"><br>
 			<input type="text" id="keysDown" placeholder="down" onkeydown="setKey('down', event)" maxlength="1"><br>
-			<!-- <button class="formButton" type="button" onclick="logIn()">Log In</button> -->
 
 			<h5>set number of balls</h5>
 			<div class="slidecontainer">
@@ -133,7 +132,6 @@
 			</form>	
 
 			<button class="settingButton" type="button" onclick="setRandomSettings()">random</button>
-			<!-- <button class="playButton" type="button" onclick="show(settings, app)">play</button> -->
 			<button class="playButton" type="button" onclick="play()">play</button>
 
 	</body>

@@ -1,19 +1,23 @@
 function setKey(key, e) {
     //TODO: fix
     let code = e.keyCode;
-    // if (47<code<106){
+    console.log(code)
+    // if (47<code && code<106){
+    if (code!=9 && code!=13){
         console.log(key, code)
-        switch (key) {
-            case 'left':
-                leftKey = code;
-            case 'up':
-                upKey = code;
-            case 'right':
-                rightKey = code;
-            case 'down':
-                downKey = code;
+        if (key == "left") {
+            leftKey = code;
         }
-    // }
+        if (key == "up") {
+            upKey = code;
+        }
+        if (key == "right") {
+            rightKey = code;
+        }
+        if (key == "down") {
+            downKey = code;
+        }
+    }
 }
 
 function setBallsNum(num) {
@@ -66,11 +70,16 @@ function setRandomColor() {
 }
 
 function play() {
-    $(document).ready(function() {
-        context = canvas.getContext("2d");
+    if (newGame == true) {
         Start();
-    });
-    show(settings, app);
-
-
+        show(settings, app);
+        // newGame = false;
+    }
+    else {
+        $(document).ready(function() {
+            context = canvas.getContext("2d");
+            Start();
+        });
+        show(settings, app);
+    }
 }
