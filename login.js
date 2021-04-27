@@ -3,7 +3,7 @@ function logIn() {
         loginForm.reset();
         show(login, settings);
         loggedIn = true;
-        document.getElementById("playBtn").display=true;
+        // document.getElementById("playBtn").display=true;
         // menuClickShow(settings)
     }
     else {
