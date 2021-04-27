@@ -1,25 +1,36 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<script src="./jquery-3.4.1.slim.min.js"></script>
-		<script type="text/javascript" src="./sliders.js"></script>
+		<script src="./jquery-3.4.1.slim.min.js" ></script>
+		<script type="text/javascript" src="./sliders.js" defer></script>
 		<script type="text/javascript" src="./register.js"></script>
 		<script type="text/javascript" src="./login.js"></script>
 		<script type="text/javascript" src="./settings.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
-		<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js" defer></script>
 		<script type="text/javascript" src="./aboutModal.js"></script>
 		<script type="text/javascript" src="./monsters.js"></script>
 		<script type="text/javascript" src="./bonusStrawberry.js"></script>
 		<link rel="stylesheet" type="text/css" href="styles.css" />
 		<link rel="stylesheet" type="text/css" href="grid.css" />
 	</head>
-	<div id="menu"class="topnav">
-		<a class="btn active" onclick="menuClickShow(welcome)">Main Menu</a>
-		<a class="btn" onclick="menuClickShow(settings)">Settings</a>
+	<!-- <div id="menu"class="topnav">
+		<a class="btn" onclick="menuClickShow(welcome)" href='#'>Main Menu</a>
+		<a class="btn" onclick="menuClickShow(settings)" href='#'>Settings</a>
 		<a onclick="openModalDialog(),closeModalDialog();" href='#'>About</a>
 		<p id="helloUsername">Hello, Guest</p>
-	  </div>
+	  </div> -->
+	  <!-- <nav> -->
+		<div class="row">
+			
+			
+			<ul class= "main-nav">
+				<li><a onclick="menuClickShow(welcome)" href="#">Main Menu</a></li>
+				<li><a onclick="menuClickShow(settings)" href="#">Settings</a></li>
+				<li><a onclick="openModalDialog(),closeModalDialog();" href="#">About</a></li>
+			</ul>
+			<p id="helloUsername">Hello, Guest</p>
+		</div>
+	<!-- </nav> -->
 
 	  <div id="aboutModal" class="modal"  style="display: none">
 		<div class="modal-content">
@@ -36,24 +47,6 @@
 	</div>
 
 	<body>
-		<div id="app" style="display: none" align=center>
-			<div id="score">
-				<label for="lblScore">SCORE:</label>
-				<input id="lblScore" type="text" />
-			</div>
-			<div id="time">
-				<label for="lblTime">TIME:</label>
-				<input id="lblTime" type="text" />
-			</div>
-			<div id="life">
-				<label for="lblLife">LIFE:</label>
-				<input id="lblLife" type="text"/>
-			</div>
-			<div id="game">
-				<canvas id="canvas" height="780" width="780"></canvas>
-			</div>
-			<button class="newGameBtn" onclick="StartNewGame()">New Game</button>
-		</div>
 
 		<div id="welcome" style="display: block" align=center>
 			<div class="logo">
@@ -128,7 +121,7 @@
 			<h2>set number of balls</h2>
 			<div class="setting">
 				<div class="slidecontainer">
-					<input type="range" min="50" max="90" value="70" class="slider" id="setBallsNumSlider" onchange="setBallsNum(value)">
+					 - <input type="range" min="50" max="90" value="70" class="slider" id="setBallsNumSlider" onchange="setBallsNum(value)"> + 
 					<p><span id="numOfBalls"></span> Balls</p>
 				</div>
 			</div>
@@ -153,7 +146,7 @@
 			<div class="setting">
 				
 				<div class="slidecontainer">
-					<input type="range" min="60" max="300" value="150" class="slider" id="setGameTime" onchange="setgameTime(value)">
+					 - <input type="range" min="60" max="300" value="150" class="slider" id="setGameTime" onchange="setgameTime(value)"> + 
 					<p><span id="seconds"></span> sec</p>
 				</div>
 			</div>
@@ -176,6 +169,24 @@
 			<button class="settingButton" type="button" onclick="setRandomSettings()">random</button>
 			<!-- <button class="playButton" type="button" onclick="show(settings, app)">play</button> -->
 		</div>
+		<div id="app" style="display: none" align=center>
+			<div id="score">
+				<label for="lblScore">SCORE:</label>
+				<input id="lblScore" type="text" />
+			</div>
+			<div id="time">
+				<label for="lblTime">TIME:</label>
+				<input id="lblTime" type="text" />
+			</div>
+			<div id="life">
+				<label for="lblLife">LIFE:</label>
+				<input id="lblLife" type="text"/>
+			</div>
+			<div id="game">
+				<canvas id="canvas" height="780" width="780"></canvas>
+			</div>
+			<button class="newGameBtn" onclick="StartNewGame()">New Game</button>
+		</div>
 			
 
 	</body>
@@ -189,7 +200,8 @@
 			console.log(loggedIn);
 			if(pressedOption==settings && loggedIn == false){
 				pressedOption = login;
-				document.getElementById("loginError").innerHTML = "Please Log in";
+				alert("Please log in first")
+				// document.getElementById("loginError").innerHTML = "Please Log in";
 			}
 			if(pressedOption==welcome && app.style.display=="block"){
 				forceStop()
@@ -216,35 +228,8 @@
 			if (pressedOption != register){
 				register.style.display="none"
 			}
-			var header = document.getElementById("menu");
-			var btns = header.getElementsByClassName("btn");
-			for (var i = 0; i < btns.length; i++) {
-				btns[i].addEventListener("click", function() {
-				var current = document.getElementsByClassName("active");
-				current[0].className = current[0].className.replace(" active", "");
-				this.className += " active";
-				});
-			}
+
 		}
-	// var themeSong = new Audio("theme.mp3");
-	// function startMusic() {
-		
-	// 	themeSong.play();
-	// }
-	// function sound(src) {
-	// 	this.sound = document.createElement("audio");
-	// 	this.sound.src = src;
-	// 	this.sound.setAttribute("preload", "auto");
-	// 	this.sound.setAttribute("controls", "none");
-	// 	this.sound.style.display = "none";
-	// 	document.body.appendChild(this.sound);
-	// 	this.play = function(){
-	// 		this.sound.play();
-	// 	}
-	// 	this.stop = function(){
-	// 		this.sound.pause();
-	// 	}    
-	// }
 	</script>
 
 
