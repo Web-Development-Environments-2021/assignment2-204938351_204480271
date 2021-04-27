@@ -20,6 +20,7 @@ body{
     background-size: 100% 100%;
     color: black;
 }
+
 .main-nav{
   float: right;
   list-style: none;
@@ -53,62 +54,7 @@ body{
 #canvas{
   background-color: black;
 }
-.topnav {
-    overflow: hidden;
-    background-color: #333;
-    margin-bottom: 150px;
-  }
-  
-  .topnav a {
-    float: left;
-    color: #f2f2f2;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-    font-size: 17px;
-    
-  }
-  .topnav p {
-    color: #f2f2f2;
-    text-align: right;
-    /* padding: 14px 16px; */
-    text-decoration: none;
-    font-size: 15px;
-    margin-right: 25px;
-  }
-  
-  .topnav a:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  .topnav a.active {
-    background-color: #ebe83b;
-    color: rgb(9, 10, 75);
-  }
 
-  .logo {
-    margin-left: 25%;
-    margin-right: 25%;
-    margin-top: 20px;
-  }
-  .logo img {
-    width: 90%;
-  }
-  /* button{
-    height:1500%;
-    width: 20%;
-    display: inline-block;
-    padding:10px 30px;
-    font-weight: 300;
-    text-decoration: none;
-    border-radius: 200px;
-    color: #000000;
-    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
-    background-color: #e3e622;
-    border: 1px solid #000000;
-
-} */
 
 
 h1 {
