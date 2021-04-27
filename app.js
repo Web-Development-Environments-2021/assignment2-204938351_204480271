@@ -52,7 +52,7 @@ function Start() {
 	window.clearInterval(interval);
 	window.clearInterval(intervalBonusStrawberry);
 	window.clearInterval(intervalMonsters);
-	themeSong.play();
+	// themeSong.play();
 	board = new Array();
 	score = 0;
 	life = 5;
