@@ -452,9 +452,7 @@ function StartNewGame(){
 	window.clearInterval(intervalBonusStrawberry);
 	window.clearInterval(intervalMonsters);
 	reset();
-	// newGame = true;
-	setTimeout(function() {menuClickShow(settings);}, 1000);
-	// menuClickShow(settings);
+	show(app, settings);
 }
 
 

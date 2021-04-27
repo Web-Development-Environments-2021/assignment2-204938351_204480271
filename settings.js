@@ -85,10 +85,14 @@ function play() {
     //     // newGame = false;
     // }
     // else {
+        // window.clearInterval(interval);
+        // window.clearInterval(intervalBonusStrawberry);
+        // window.clearInterval(intervalMonsters);
         $(document).ready(function() {
             context = canvas.getContext("2d");
             Start();
         });
         show(settings, app);
+
     // }
 }
