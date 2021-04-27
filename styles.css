@@ -236,9 +236,19 @@ button:hover{
 }
 
 footer {
+  /* position:absolute;
+  bottom:0;
   background-attachment: fixed;
   background-color: rgba(214, 212, 197, 0.322); 
+  */
   font-family: 'Courier New', Courier, monospace;
-  font-size: 14px;font-weight:400;line-height:1.33em;
+  font-size: 70%;
+  /* position: fixed; */
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgba(214, 212, 197, 0.322);
+  color: rgb(0, 0, 0);
+  text-align: center;
 }
 

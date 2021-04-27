@@ -52,6 +52,11 @@ function Start() {
 	window.clearInterval(interval);
 	window.clearInterval(intervalBonusStrawberry);
 	window.clearInterval(intervalMonsters);
+	window.addEventListener("keydown", function(e) {
+		if(["Space","ArrowUp","ArrowDown","ArrowLeft","ArrowRight"].indexOf(e.code) > -1) {
+			e.preventDefault();
+		}
+	}, false);
 	// themeSong.play();
 	board = new Array();
 	score = 0;
