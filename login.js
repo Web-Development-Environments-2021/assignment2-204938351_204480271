@@ -23,3 +23,11 @@ function isValidLogin() {
     }
     return false;
 }
+
+function logOut() {
+    if (loggedIn == true) {
+        loggedIn = false;
+        usernameOnMenuBar("Guest");
+        menuClickShow(welcome);
+    }
+}
