@@ -2,16 +2,19 @@
 <html>
 	<head>
 		<script src="./jquery-3.4.1.slim.min.js"></script>
+		<script type="text/javascript" src="./sliders.js"></script>
 		<script type="text/javascript" src="./register.js"></script>
 		<script type="text/javascript" src="./login.js"></script>
 		<script type="text/javascript" src="./settings.js"></script>
 		<script type="text/javascript" src="./app.js"></script>
+		<script src="https://unpkg.com/ionicons@5.4.0/dist/ionicons.js" defer></script>
 		<script type="text/javascript" src="./aboutModal.js"></script>
 		<script type="text/javascript" src="./monsters.js"></script>
 		<script type="text/javascript" src="./bonusStrawberry.js"></script>
 		<link rel="stylesheet" type="text/css" href="styles.css" />
+		<link rel="stylesheet" type="text/css" href="grid.css" />
 	</head>
-	<div id= "menu"class="topnav">
+	<div id="menu"class="topnav">
 		<a class="btn active" onclick="menuClickShow(welcome)">Main Menu</a>
 		<a class="btn" onclick="menuClickShow(settings)">Settings</a>
 		<a onclick="openDialog(),closeModal();" href="#about">About</a>
@@ -53,88 +56,127 @@
 		</div>
 
 		<div id="welcome" style="display: block" align=center>
+			<div class="logo">
+				<img src="pics/logo2.png">
+			</div>
+			<div class="gif">
 			<img src="pics/gif.gif">
-			<br\>
-			<!-- <img src="pics/pacmanLogo.png"> -->
-			<button class="menuBut" onclick="show(welcome, login)">Login</button>
-			<button class="menuBut" onclick="show(welcome, register)">Register</button>
-			<button id="playBtn" class="menuBut" display="none" onclick="show(welcome, app)">play</button>
+			</div>
+			<div class="menuButtons">
+				<button class="menuBut" onclick="show(welcome, login)">Login</button>
+				<button class="menuBut" onclick="show(welcome, register)">Register</button>
+			</div>
+			<!-- <button id="playBtn" class="menuBut" display="none" onclick="show(welcome, app)">play</button> -->
 		</div>
 
 		<div id="register" style="display: none" align=center>
+			<h1>signup and start<br> playing!</h1>
 			<form id="registerForm">
-				<input type="text" id="Username" placeholder="Enter Username" required><br>
-				<input type="text" id="Password"  placeholder="Enter Password" required><br>
-				<input type="text" id="FullName"  placeholder="Enter Full Name" required><br>
-				<input type="text" id="Email" placeholder="Enter Email" required><br>
-				<label for="birthday">Birthday:</label>
-				<input type="date" id="Birthday" required>
-				<button type="button" onclick="submitDetails()" value="submit">Submit</button>
-				<button type="button" onclick="show(register, welcome)" value="submit">Cancel</button>
-			  </form>
+				<div class="registerInputs">
+					<label>Username</label>
+					<input type="text" id="Username" placeholder="Enter Username" required><br>
+					<label>Password</label>
+					<input type="text" id="Password"  placeholder="Enter Password" required><br>
+					<label>FullName</label>
+					<input type="text" id="FullName"  placeholder="Enter Full Name" required><br>
+					<label>Email</label>
+					<input type="text" id="Email" placeholder="Enter Email" required><br>
+					<label for="birthday">Birthday:</label>
+					<input type="date" id="Birthday" required>
+				</div>
+				<div class="registerButtons">
+					<button type="button" onclick="submitDetails()" value="submit">Submit</button>
+					<button type="button" onclick="show(register, welcome)" value="submit">Cancel</button>
+				</div>
+			</form>
 			  <p id="submitionError"></p>
 		</div>
 
 		<div id="login" style="display: none" align=center>
+			<h1>login and start<br> playing!</h1>
 			<form id="loginForm">
-				<div>
-
-				<input type="text" id="username" placeholder="Username" required><br>
-				<input type="password" id="password" placeholder="password" required><br>
-				<button class="formButton" type="button" onclick="logIn()">Log In</button>
-				<button class="formButton" type="button" onclick="show(login, welcome)">Cancel</button>
-			</div>
+				<div class="loginInputs">
+					<label>username</label>
+					<input type="text" id="username" placeholder="Username" required><br>
+					<label>password</label>
+					<input type="password" id="password" placeholder="password" required><br>
+				</div>
+				<div class="loginButtons">
+					<button class="formButton" type="button" onclick="logIn()">Log In</button>
+					<button class="formButton" type="button" onclick="show(login, welcome)">Cancel</button>
+				</div>
 			</form> 
-			<p id="loginError"></p>
-		</div>		
+			<p id="loginError"></p>	
+		</div>
+			
 
 		<div id="settings" style="display: none" align=center>
-			<h5>set keys</h5>
-			<input type="text" id="keyLeft" placeholder="left" onkeydown="setKey('left', event)" maxlength="1"><br>
-			<input type="text" id="keyUp" placeholder="up" onkeydown="setKey('up', event)" maxlength="1"><br>
-			<input type="text" id="keyRight" placeholder="right" onkeydown="setKey('right', event)" maxlength="1"><br>
-			<input type="text" id="keysDown" placeholder="down" onkeydown="setKey('down', event)" maxlength="1"><br>
-			<!-- <button class="formButton" type="button" onclick="logIn()">Log In</button> -->
-
-			<h5>set number of balls</h5>
-			<div class="slidecontainer">
-				<input type="range" min="50" max="90" value="70" class="slider" id="setBallsNum" onchange="setBallsNum(value)">
+			<h1>game settings</h1>
+			<h2>set keys</h2>
+			<div class="setting">
+					<div class="keyForm">
+						<label>&#x2190</label>
+						<input type="text" id="keyLeft" placeholder="left" onkeydown="setKey('left', event)" maxlength="1"><br>
+						<label>&#x2191;</label>
+						<input type="text" id="keyUp" placeholder="up" onkeydown="setKey('up', event)" maxlength="1"><br>
+						<label>&#x2192;</label>
+						<input type="text" id="keyRight" placeholder="right" onkeydown="setKey('right', event)" maxlength="1"><br>
+						<label>&#x2193;</label>
+						<input type="text" id="keysDown" placeholder="down" onkeydown="setKey('down', event)" maxlength="1"><br>
+					</div>
+			</div>
+			<h2>set number of balls</h2>
+			<div class="setting">
+				<div class="slidecontainer">
+					<input type="range" min="50" max="90" value="70" class="slider" id="setBallsNumSlider" onchange="setBallsNum(value)">
+					<p><span id="numOfBalls"></span> Balls</p>
+				</div>
 			</div>
 
-			<h5>set balls color</h5>
-			<div>
-				<input type="color" id="ball5Points" value="#e66465" onchange="setballsColor(5, value)">
-				<label for="head">5 points ball color</label>
-			</div>
-			<div>
-				<input type="color" id="ball15Points" value="#FF7B33" onchange="setballsColor(15, value)">
-				<label for="head">15 points ball color</label>
-			</div>
-			<div>
-				<input type="color" id="ball25Points" value="#f6b73c" onchange="setballsColor(25, value)">
-				<label for="head">25 points ball color</label>
-			</div>
-
-			<h5>set game time</h5>
-			<div class="slidecontainer">
-				<input type="range" min="60" max="300" value="150" class="slider" id="setGameTime" onchange="setgameTime(value)">sec
+			<h2>set balls color</h2>
+			<div class="setting">
+				<div>
+					<input type="color" id="ball5Points" value="#e66465" onchange="setballsColor(5, value)">
+					<label for="head">5 points ball color</label>
+				</div>
+				<div>
+					<input type="color" id="ball15Points" value="#FF7B33" onchange="setballsColor(15, value)">
+					<label for="head">15 points ball color</label>
+				</div>
+				<div>
+					<input type="color" id="ball25Points" value="#f6b73c" onchange="setballsColor(25, value)">
+					<label for="head">25 points ball color</label>
+				</div>
 			</div>
 
-			<h5>set amount of monsters</h5>
-			<form>
-				<input type="radio" id="monster1" name="monsters" value="1" onclick="setNumOfMonsters(value)">
-				<label for="male">1 monsters</label><br>
-				<input type="radio" id="monster2" name="monsters" value="2" onclick="setNumOfMonsters(value)">
-				<label for="female">2 monsters</label><br>
-				<input type="radio" id="monster3" name="monsters" value="3" onclick="setNumOfMonsters(value)">
-				<label for="other">3 monsters</label><br>
-				<input type="radio" id="monster4" name="monsters" value="4" onclick="setNumOfMonsters(value)">
-				<label for="other">4 monsters</label><br>
-			</form>	
+			<h2>set game time</h2>
+			<div class="setting">
+				
+				<div class="slidecontainer">
+					<input type="range" min="60" max="300" value="150" class="slider" id="setGameTime" onchange="setgameTime(value)">
+					<p><span id="seconds"></span> sec</p>
+				</div>
+			</div>
 
+			<h2>set amount of monsters</h2>
+			<div class="setting">
+				<form>
+					<input type="radio" id="monster1" name="monsters" value="1" onclick="setNumOfMonsters(value)" checked>
+					<label for="male">1 monsters</label><br>
+					<input type="radio" id="monster2" name="monsters" value="2" onclick="setNumOfMonsters(value)">
+					<label for="female">2 monsters</label><br>
+					<input type="radio" id="monster3" name="monsters" value="3" onclick="setNumOfMonsters(value)">
+					<label for="other">3 monsters</label><br>
+					<input type="radio" id="monster4" name="monsters" value="4" onclick="setNumOfMonsters(value)">
+					<label for="other">4 monsters</label><br>
+				</form>	
+			</div>	
+
+			<button class="playButton" type="button" onclick="play()">play</button>
 			<button class="settingButton" type="button" onclick="setRandomSettings()">random</button>
 			<!-- <button class="playButton" type="button" onclick="show(settings, app)">play</button> -->
-			<button class="playButton" type="button" onclick="play()">play</button>
+		</div>
+			
 
 	</body>
 
