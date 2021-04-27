@@ -29,7 +29,7 @@
 				<li><a onclick="menuClickShow(settings)" href="#">Settings</a></li>
 				<li><a onclick="openModalDialog(),closeModalDialog();" href="#">About</a></li>
 			</ul>
-			<p id="helloUsername">Hello, Guest</p>
+			<p style="margin: 30px" id="helloUsername">Hello, Guest</p>
 		</div>
 	<!-- </nav> -->
 
@@ -105,7 +105,7 @@
 			<h2>set keys</h2>
 			<div class="setting">
 					<div class="keyForm">
-						<label>&#x2190</label>
+						<label>&#x2190;</label>
 						<input type="text" id="keyLeft" placeholder="left" onkeydown="setKey('left', event)" maxlength="1"><br>
 						<label>&#x2191;</label>
 						<input type="text" id="keyUp" placeholder="up" onkeydown="setKey('up', event)" maxlength="1"><br>
@@ -166,23 +166,66 @@
 			<button class="settingButton" type="button" onclick="setRandomSettings()">random play</button>
 			<!-- <button class="playButton" type="button" onclick="show(settings, app)">play</button> -->
 		</div>
-		<div id="app" style="display: none" align=center>
-			<div id="score">
-				<label for="lblScore">SCORE:</label>
-				<input id="lblScore" type="text" />
+
+		<div id="app" style="display: none" >
+			<div class="appContainer">
+				<div class="sidebar" style="float: right">
+					<!-- <br><br><br> -->
+					<div class="scoreBoard">
+						<div id="score board">
+							<label for="lblScore">SCORE:</label>
+							<input id="lblScore" type="text" />
+						</div>
+						<div id="time board">
+							<label for="lblTime">TIME:</label>
+							<input id="lblTime" type="text" />
+						</div>
+						<div id="life board">
+							<label for="lblLife">LIFE:</label>
+							<input id="lblLife" type="text"/>
+						</div>
+					</div>
+					<div class="keysSettings side">
+						<h2>KEYS:</h2>
+						<p id="keyLeftShow">&#x2190;      37</p>
+						<p id="keyUpShow"> &#x2191;      38</p>
+						<p id="keyRightShow"> &#x2192;    39</p>
+						<p id="keyDownShow">&#x2193;      40</p>
+					</div>
+					<div class="ballsSettings side">
+						<h2>NUM OF BALLS:</h2>
+						<p id="numOfBallsShow">70</p>
+					</div>
+					<div class="ballsColorSettings side">
+						<h2>BALLS SCORE:</h2>
+						<div>
+							<input type="color" id="ball5PointsShow" value="#e66465">
+							<label for="head">5 points ball color</label>
+						</div>
+						<div>
+							<input type="color" id="ball15PointsShow" value="#FF7B33">
+							<label for="head">15 points ball color</label>
+						</div>
+						<div>
+							<input type="color" id="ball25PointsShow" value="#f6b73c">
+							<label for="head">25 points ball color</label>
+						</div>
+					</div>
+					<div class="timeSettings side">
+						<h2>TOTAL TIME:</h2>
+						<p id="timeShow">150</p>
+					</div>
+					<div class="numOfMonstersSettings side">
+						<h2>NUM OF MONSTERS:</h2>
+						<p id="numOfMonstersShow">1</p>
+					</div>
+					<button style="width: 30%" class="newGameBtn" onclick="StartNewGame()">New Game</button>
+					<!-- <br><br><br> -->
+				</div>
+				<div class="game">
+					<canvas id="canvas" height="780" width="780"></canvas>
+				</div>
 			</div>
-			<div id="time">
-				<label for="lblTime">TIME:</label>
-				<input id="lblTime" type="text" />
-			</div>
-			<div id="life">
-				<label for="lblLife">LIFE:</label>
-				<input id="lblLife" type="text"/>
-			</div>
-			<div id="game">
-				<canvas id="canvas" height="780" width="780"></canvas>
-			</div>
-			<button class="newGameBtn" onclick="StartNewGame()">New Game</button>
 		</div>
 
 		<footer>
@@ -204,7 +247,14 @@
 	<script>
 		function show(toHide, toShow) {
 			toHide.style.display="none"
-			toShow.style.display="block"
+			if(toShow==app){
+				toShow.style.display="inline";
+			}
+			else{
+				toShow.style.display="block"
+			}
+
+			
 		}
 		function menuClickShow(pressedOption){
 			console.log(loggedIn);
@@ -213,9 +263,9 @@
 				alert("Please log in first")
 				// document.getElementById("loginError").innerHTML = "Please Log in";
 			}
-			if(pressedOption==welcome && app.style.display=="block"){
-				forceStop()
-			}
+			// if(pressedOption==welcome && app.style.display=="block"){
+			// 	forceStop()
+			// }
 			pressedOption.style.display="block"
 			if (pressedOption != welcome){
 				welcome.style.display="none"
