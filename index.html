@@ -12,14 +12,17 @@
 		<script type="text/javascript" src="./bonusStrawberry.js"></script>
 		<link rel="stylesheet" type="text/css" href="styles.css" />
 		<link rel="stylesheet" type="text/css" href="grid.css" />
+		<title>Best Pacman Game Ever</title>
 	</head>
-	<!-- <div id="menu"class="topnav">
+
+	<body>
+		<!-- <div id="menu"class="topnav">
 		<a class="btn" onclick="menuClickShow(welcome)" href='#'>Main Menu</a>
 		<a class="btn" onclick="menuClickShow(settings)" href='#'>Settings</a>
 		<a onclick="openModalDialog(),closeModalDialog();" href='#'>About</a>
 		<p id="helloUsername">Hello, Guest</p>
-	  </div> -->
-	  <!-- <nav> -->
+	  	</div> -->
+	  	<!-- <nav> -->
 		<div class="row header">
 			<ul class= "main-nav">
 				<li><a onclick="menuClickShow(welcome)" href="#">Main Menu</a></li>
@@ -30,28 +33,24 @@
 		</div>
 	<!-- </nav> -->
 
-	  <div id="aboutModal" class="modal"  style="display: none">
+	<div id="aboutModal" class="modal"  style="display: none">
 		<div class="modal-content">
 				<span class="close" title="Close Modal">&times;</span>
-			<p>aaaaaaaaaaaaaaaaaa</p>
-			<p>aaaaaaaaaaaaaaaaaa</p>
-			<p>aaaaaaaabbbbbbbbbbbbbbb</p>
-			<p>	oooooooooooooooooooooo</p>
-			<p>	uuuuuuuuuuuuuuuuuuuuuu</p>
-			<p>	ttttttttttttttttttttttttt</p>
-			</p>
+			<p align="center"><b>This Pac-Man Game created by:<br>
+			Noaa Kless and Amit Ostrov</b></p>
+			<p>We used jQuery plugin in several cases:</p>
+			<p>1.	to check the validation of registration</p>
+			<p>2.	to open and close this model dialog</p>
+			<p><b>Hope you enjoyed our game!</b></p>
 		</div>
 
 	</div>
-
-	<body>
-
 		<div id="welcome" style="display: block" align=center>
 			<div class="logo">
-				<img src="pics/logo2.png">
+				<img src="pics/logo.png" width="897.6" height="214.4">
 			</div>
 			<div class="gif">
-			<img src="pics/gif.gif">
+				<img src="pics/gif.gif">
 			</div>
 			<div class="menuButtons">
 				<button class="menuBut" onclick="show(welcome, login)">Login</button>
@@ -67,9 +66,9 @@
 					<label>Username</label>
 					<input type="text" id="Username" placeholder="Enter Username" required><br>
 					<label>Password</label>
-					<input type="text" id="Password"  placeholder="Enter Password" required><br>
+					<input type="password" id="Password" placeholder="Enter Password" required><br>
 					<label>FullName</label>
-					<input type="text" id="FullName"  placeholder="Enter Full Name" required><br>
+					<input type="text" id="FullName" placeholder="Enter Full Name" required><br>
 					<label>Email</label>
 					<input type="text" id="Email" placeholder="Enter Email" required><br>
 					<label for="birthday">Birthday:</label>
@@ -127,15 +126,15 @@
 			<h2>set balls color</h2>
 			<div class="setting">
 				<div>
-					<input type="color" id="ball5Points" value="#e66465" onchange="setballsColor(5, value)">
+					<input type="color" id="ball5Points" value="#FF5C00" onchange="setballsColor(5, value)">
 					<label for="head">5 points ball color</label>
 				</div>
 				<div>
-					<input type="color" id="ball15Points" value="#FF7B33" onchange="setballsColor(15, value)">
+					<input type="color" id="ball15Points" value="#FE99D6" onchange="setballsColor(15, value)">
 					<label for="head">15 points ball color</label>
 				</div>
 				<div>
-					<input type="color" id="ball25Points" value="#f6b73c" onchange="setballsColor(25, value)">
+					<input type="color" id="ball25Points" value="#77C3EC" onchange="setballsColor(25, value)">
 					<label for="head">25 points ball color</label>
 				</div>
 			</div>
@@ -185,8 +184,21 @@
 			</div>
 			<button class="newGameBtn" onclick="StartNewGame()">New Game</button>
 		</div>
-			
 
+		<footer>
+			<p align=center>
+				Hello Pac-Man, Welcome to our game!<br>
+				What you need to do is to eat the coins placed in the board while avoiding the ghosts that wants to catch you. You will win the game when you eat all the coins!
+				You have 5 lives, but every time<br>a ghost reaches you- you will lose one of them. The game ends when the time is up or when all lives are lost. When the time is up, if you are still alive with at least 100 points you will win as well.<br>
+				GOOD LUCK!
+			</p>
+			<h5>Authors:<br>
+				Noaa Kless
+				<a href="mailto:noaakless@gmail.com">noaakless@gmail.com</a><br>
+				Amit Ostrov
+				<a href="mailto:ostrovamit@gmail.com">ostrovamit@gmail.com</a>
+			</h5>
+		</footer>
 	</body>
 
 	<script>

@@ -22,9 +22,9 @@ var numOf5PointsBall=30;
 var numOf15PointsBall=15;
 var numOf25PointsBall=5;
 var ballPoints = [numOf5PointsBall, numOf15PointsBall, numOf25PointsBall]
-var color5PointsBall = "#e66465";
-var color15PointsBall = "#e63468";
-var color25PointsBall = "#f6b73c";
+var color5PointsBall = "#FF5C00";
+var color15PointsBall = "#FE99D6";
+var color25PointsBall = "#77C3EC";
 var lastPressed=8; //pacman always looks to the right 
 var size = 13;
 var pacman_remain = 1;
@@ -88,7 +88,12 @@ function Start() {
 				(i == 3 && j == 4) ||
 				(i == 3 && j == 5) ||
 				(i == 6 && j == 1) ||
-				(i == 6 && j == 2)
+				(i == 6 && j == 2) ||
+				(i == 5 && j == 10) ||
+				(i == 5 && j == 11) ||
+				(i == 10 && j == 7) ||
+				(i == 10 && j == 8) ||
+				(i == 10 && j == 9)
 			) {
 				board[i][j] = 4;
 			//balls and walls
@@ -245,7 +250,7 @@ function Draw() {
 			center.y = j * 60 + 30;
 			if (board[i][j] == 5) {    //up
 				context.beginPath();
-				context.arc(center.x, center.y, 30, 1.65 * Math.PI, 1.35 * Math.PI); // half circle
+				context.arc(center.x, center.y, 28, 1.65 * Math.PI, 1.35 * Math.PI); // half circle
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
@@ -256,7 +261,7 @@ function Draw() {
 			}
 			else if (board[i][j] == 6) {     //down
 				context.beginPath();
-				context.arc(center.x, center.y, 30, 0.35 * Math.PI, 0.65 * Math.PI,true); // half circle
+				context.arc(center.x, center.y, 28, 0.35 * Math.PI, 0.65 * Math.PI,true); // half circle
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
@@ -267,7 +272,7 @@ function Draw() {
 			}
 			else if (board[i][j] == 7) {    //left
 				context.beginPath();
-				context.arc(center.x, center.y, 30, 0.85 * Math.PI, 1.15 * Math.PI,true); // half circle
+				context.arc(center.x, center.y, 28, 0.85 * Math.PI, 1.15 * Math.PI,true); // half circle
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
@@ -278,7 +283,7 @@ function Draw() {
 			}
 			else if (board[i][j] == 8) {    //right
 				context.beginPath();
-				context.arc(center.x, center.y, 30, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
+				context.arc(center.x, center.y, 28, 0.15 * Math.PI, 1.85 * Math.PI); // half circle
 				context.lineTo(center.x, center.y);
 				context.fillStyle = pac_color; //color
 				context.fill();
@@ -287,21 +292,21 @@ function Draw() {
 				context.fillStyle = "black"; //color
 				context.fill();
 			}
-			 else if (board[i][j] == 1) {     //blue ball
+			 else if (board[i][j] == 1) {    //red ball 5 pints
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 9, 0, 2 * Math.PI); // circle
 				context.fillStyle = color5PointsBall; //color
 				context.fill();
 			} 
-			else if (board[i][j] == 2) {    //green ball
+			else if (board[i][j] == 2) {    //pink ball 15 pints
 				context.beginPath(); 
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 11, 0, 2 * Math.PI); // circle
 				context.fillStyle = color15PointsBall; //color
 				context.fill();
 			} 
-			else if (board[i][j] == 3) {    //red ball
+			else if (board[i][j] == 3) {    //blue ball 25 pints
 				context.beginPath();
-				context.arc(center.x, center.y, 15, 0, 2 * Math.PI); // circle
+				context.arc(center.x, center.y, 13, 0, 2 * Math.PI); // circle
 				context.fillStyle = color25PointsBall; //color
 				context.fill();
 			} 
@@ -314,17 +319,17 @@ function Draw() {
 			else if (board[i][j] == 9) {   //medicin
 				let medicinImg = new Image(3,3);
 				medicinImg.src = "pics/heart.png";
-				context.drawImage(medicinImg, i*60, j*60, 50, 62);
+				context.drawImage(medicinImg, i*60, j*60, 46, 46);
 			}
 			else if (board[i][j] == 10) {    //strawberry
 				let strawberryImg = new Image(3,3);
 				strawberryImg.src = "pics/strawberry.png";
-				context.drawImage(strawberryImg, i*60, j*60, 50, 62);
+				context.drawImage(strawberryImg, i*60, j*60, 46, 46);
 			}
 			else if (board[i][j] == 11) {    //clock
 				let clockImg = new Image(3,3);
 				clockImg.src = "pics/clock.png";
-				context.drawImage(clockImg, i*60, j*60, 56, 56);
+				context.drawImage(clockImg, i*60, j*60, 46, 46);
 			}
 			else if (board[i][j] == 12) {    //monster
 				let monsterImg = new Image(3,3);
@@ -407,17 +412,7 @@ function UpdatePosition() {
 	if (score >= 20 && timer_time <= 10) {
 		pac_color = "green";
 	}
-	// if (score == 500) { //TODO: where?
-	// 	lblScore.value = score;
-	// 	lblTime.value = timer_time;
-	// 	themeSong.pause();
-	// 	window.clearInterval(interval);
-	// 	window.clearInterval(intervalBonusStrawberry);
-	// 	window.clearInterval(intervalMonsters);
-	// 	window.alert("Game completed");
-	// }
-	// time is up
-	else if (timer_time <= 0) {
+	if (timer_time <= 0) {
 		lblTime.value = 0
 		lblScore.value = score;
 		lblLife.value = life;
@@ -431,7 +426,7 @@ function UpdatePosition() {
 			setTimeout(function() {alert("Winner!!!")}, 300);
 		}
 	// pacman is dead
-	} else if (life <= 0){
+	} if (life <= 0){
 		lblTime.value = timer_time;
 		lblScore.value = score;
 		lblLife.value = life;
