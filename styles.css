@@ -20,6 +20,33 @@ body{
     background-size: 100% 100%;
     color: black;
 }
+.main-nav{
+  float: right;
+  list-style: none;
+  margin: 55px 55px;
+  
+}
+
+.main-nav li{
+  display: inline-block;
+  margin-left: 40px;
+}
+
+.main-nav li a:link,
+.main-nav li a:visited{
+  padding:8px;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 90%;
+  border-bottom: 2px solid transparent;
+  transition: border-bottom 0.2s;
+}
+
+.main-nav li a:hover,
+.main-nav li a:active{
+  border-bottom: 2px solid #000000;
+}
 /* #settings{
   color: black;
 } */
