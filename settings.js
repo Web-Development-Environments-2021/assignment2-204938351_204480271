@@ -78,16 +78,17 @@ function setRandomColor() {
 }
 
 function play() {
-    if (newGame == true) {
-        Start();
-        show(settings, app);
-        // newGame = false;
-    }
-    else {
+    // if (newGame == true) {
+    //     context = canvas.getContext("2d");
+    //     Start();
+    //     show(settings, app);
+    //     // newGame = false;
+    // }
+    // else {
         $(document).ready(function() {
             context = canvas.getContext("2d");
             Start();
         });
         show(settings, app);
-    }
+    // }
 }

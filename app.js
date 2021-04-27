@@ -337,9 +337,9 @@ function Draw() {
 
 function UpdatePosition() {
 	board[shape.i][shape.j] = 0;
-	if(newGame == true) {
-		Draw();
-	}
+	// if(newGame == true) {
+		// Draw();
+	// }
 	var x = GetKeyPressed();
 	if (x == 5) {   //up
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
@@ -452,8 +452,9 @@ function StartNewGame(){
 	window.clearInterval(intervalBonusStrawberry);
 	window.clearInterval(intervalMonsters);
 	reset();
-	newGame = true;
-	menuClickShow(settings);
+	// newGame = true;
+	setTimeout(function() {menuClickShow(settings);}, 1000);
+	// menuClickShow(settings);
 }
 
 
