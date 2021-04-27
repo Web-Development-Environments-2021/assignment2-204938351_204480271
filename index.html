@@ -28,6 +28,7 @@
 				<li><a onclick="menuClickShow(welcome)" href="#">Main Menu</a></li>
 				<li><a onclick="menuClickShow(settings)" href="#">Settings</a></li>
 				<li><a onclick="openModalDialog(),closeModalDialog();" href="#">About</a></li>
+				<li><a onclick="logOut()" href="#">Log out</a></li>
 			</ul>
 			<p style="margin: 30px" id="helloUsername">Hello, Guest</p>
 		</div>
@@ -187,10 +188,10 @@
 					</div>
 					<div class="keysSettings side">
 						<h2>KEYS:</h2>
-						<p id="keyLeftShow">&#x2190;      37</p>
-						<p id="keyUpShow"> &#x2191;      38</p>
-						<p id="keyRightShow"> &#x2192;    39</p>
-						<p id="keyDownShow">&#x2193;      40</p>
+						<p id="keyLeftShow">&#x2190;         left arrow</p>
+						<p id="keyUpShow"> &#x2191;         up arrow</p>
+						<p id="keyRightShow"> &#x2192;         right arrow</p>
+						<p id="keyDownShow">&#x2193;         down arrow</p>
 					</div>
 					<div class="ballsSettings side">
 						<h2>NUM OF BALLS:</h2>
@@ -199,11 +200,11 @@
 					<div class="ballsColorSettings side">
 						<h2>BALLS SCORE:</h2>
 						<div>
-							<input type="color" id="ball5PointsShow" value="#e66465">
+							<input type="color" id="ball5PointsShow" value="#FF5C00">
 							<label for="head">5 points ball color</label>
 						</div>
 						<div>
-							<input type="color" id="ball15PointsShow" value="#FF7B33">
+							<input type="color" id="ball15PointsShow" value="#FE99D6">
 							<label for="head">15 points ball color</label>
 						</div>
 						<div>
@@ -245,6 +246,8 @@
 	</body>
 
 	<script>
+		var activScreen = welcome;
+
 		function show(toHide, toShow) {
 			toHide.style.display="none"
 			if(toShow==app){
@@ -253,41 +256,103 @@
 			else{
 				toShow.style.display="block"
 			}
+			activScreen = toShow;
 
 			
 		}
 		function menuClickShow(pressedOption){
-			console.log(loggedIn);
-			if(pressedOption==settings && loggedIn == false){
-				pressedOption = login;
-				alert("Please log in first")
-				// document.getElementById("loginError").innerHTML = "Please Log in";
+			if (activScreen == welcome && pressedOption == settings) {
+				if (loggedIn == false) {
+					alert("Please log in first");
+				}
+				else {
+					activScreen = settings;
+					show(welcome, settings);
+				}
 			}
-			// if(pressedOption==welcome && app.style.display=="block"){
-			// 	forceStop()
+			if (activScreen == logIn && pressedOption == settings) {
+				if (loggedIn == false) {
+					alert("Please log in first");
+				}
+				else {
+					activScreen = settings;
+					show(logIn, settings);
+				}
+			}
+			if (activScreen == register && pressedOption == settings) {
+				if (loggedIn == false) {
+					alert("Please log in first");
+				}
+				else {
+					activScreen = settings;
+					show(register, settings);
+				}
+			}
+			else if (activScreen == app && pressedOption == settings) {
+				activScreen = settings;
+				themeSong.pause();
+				window.clearInterval(interval);
+				window.clearInterval(intervalBonusStrawberry);
+				window.clearInterval(intervalMonsters);
+				reset();
+				show(app, settings);
+			}
+			else if (activScreen == settings && pressedOption == welcome) {
+				activScreen = welcome;
+				show(settings, welcome);
+			}
+			else if (activScreen == logIn && pressedOption == welcome) {
+				activScreen = welcome;
+				show(login, welcome);
+			}
+			else if (activScreen == register && pressedOption == welcome) {
+				activScreen = welcome;
+				show(register, welcome);
+			}
+			else if (activScreen == app && pressedOption == welcome) {
+				activScreen = welcome;
+				themeSong.pause();
+				window.clearInterval(interval);
+				window.clearInterval(intervalBonusStrawberry);
+				window.clearInterval(intervalMonsters);
+				reset();
+				show(app, welcome);
+			}
+			
+
+
+
+			// console.log(loggedIn);
+			// if(pressedOption==settings && loggedIn == false){
+			// 	pressedOption = login;
+			// 	alert("Please log in first")
+			// 	// document.getElementById("loginError").innerHTML = "Please Log in";
 			// }
-			pressedOption.style.display="block"
-			if (pressedOption != welcome){
-				welcome.style.display="none"
-			}
-			if (pressedOption != app){
-				app.style.display="none"
-			}
-			if (pressedOption != time){
-				time.style.display="none"
-			}
-			if (pressedOption != game){
-				game.style.display="none"
-			}
-			if (pressedOption != settings){
-				settings.style.display="none"
-			}
-			if (pressedOption != login){
-				login.style.display="none"
-			}
-			if (pressedOption != register){
-				register.style.display="none"
-			}
+			// // if(pressedOption==welcome && app.style.display=="block"){
+			// // 	forceStop()
+			// // }
+			// pressedOption.style.display="block"
+			// if (pressedOption != welcome){
+			// 	welcome.style.display="none"
+			// }
+			// if (pressedOption != app){
+			// 	app.style.display="none"
+			// }
+			// if (pressedOption != time){
+			// 	time.style.display="none"
+			// }
+			// if (pressedOption != game){
+			// 	game.style.display="none"
+			// }
+			// if (pressedOption != settings){
+			// 	settings.style.display="none"
+			// }
+			// if (pressedOption != login){
+			// 	login.style.display="none"
+			// }
+			// if (pressedOption != register){
+			// 	register.style.display="none"
+			// }
 
 		}
 	</script>

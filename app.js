@@ -37,7 +37,7 @@ var downKey = 40;
 var gameTime = 150;
 var numOfMonsters = 1;
 var themeSong = new Audio("theme.mp3");
-var newGame = false;
+// var newGame = false;
 
 
 

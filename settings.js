@@ -1,25 +1,26 @@
 function setKey(key, e) {
     //TODO: fix
     let code = e.keyCode;
+    let keyName = String.fromCharCode(code);
     console.log(code)
     // if (47<code && code<106){
     if (code!=9 && code!=13){
         console.log(key, code)
         if (key == "left") {
             leftKey = code;
-            document.getElementById("keyLeftShow").innerHTML = code;
+            document.getElementById("keyLeftShow").innerHTML = "&#x2190         "+keyName;
         }
         if (key == "up") {
             upKey = code;
-            document.getElementById("keyUpShow").innerHTML = code;
+            document.getElementById("keyUpShow").innerHTML = "&#x2191         "+keyName;
         }
         if (key == "right") {
             rightKey = code;
-            document.getElementById("keyRightShow").innerHTML = code;
+            document.getElementById("keyRightShow").innerHTML = "&#x2192         "+keyName;
         }
         if (key == "down") {
             downKey = code;
-            document.getElementById("keyDownShow").innerHTML = code;
+            document.getElementById("keyDownShow").innerHTML = "&#x2193         "+keyName;
         }
     }
 }
