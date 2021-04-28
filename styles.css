@@ -258,6 +258,6 @@ footer {
   width: 100%;
   background-color: rgba(214, 212, 197, 0.322);
   color: rgb(0, 0, 0);
-  text-align: center;
+  /* text-align: center; */
 }
 

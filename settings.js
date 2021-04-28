@@ -27,6 +27,7 @@ function setKey(key, e) {
 
 function setBallsNum(num) {
     food_remain = num;
+    scoreGoal = num;
     console.log("settings food remain: " + food_remain)
     numOf5PointsBall = Math.floor(0.6*num);
     numOf15PointsBall = Math.floor(0.3*num);

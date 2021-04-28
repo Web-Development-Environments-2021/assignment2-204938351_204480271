@@ -53,17 +53,20 @@ function isValidMove(i, j) {
 
 function updateMonster() {
     for (var m = 0; m < monsters.length; m++) {
-        let vertical = monsters[m].i - shape.i;
-        let horizontal = monsters[m].j - shape.j;
+        let goLeftOrRight = monsters[m].i - shape.i;
+        let goUpOrDown = monsters[m].j - shape.j;
         // let sideToSide = true;
+        let randDirection = Math.random();
+        // console.log(randDirection);
         board[monsters[m].i][monsters[m].j] = monsters[m].priorValue;
-        if (horizontal < vertical) { // go left or right
-            if (horizontal > 0 ) { // if needs to go up
+        // if (goUpOrDown < goLeftOrRight) { // go left or right
+        if (randDirection < 0.5) { // go left or right
+            if (goUpOrDown > 0 ) { // if needs to go up
                 if (isValidMove(monsters[m].i ,monsters[m].j-1)) {  // up
                         monsters[m].priorValue = board[monsters[m].i][monsters[m].j-1];
                         monsters[m].j = monsters[m].j-1;
                 }
-                else if (isValidMove(monsters[m].i-1 ,monsters[m].j)) { // if needs to go left
+                else if (randDirection < 0.5 && isValidMove(monsters[m].i-1 ,monsters[m].j)) { // if needs to go left
                     monsters[m].priorValue = board[monsters[m].i-1][monsters[m].j];
                     monsters[m].i = monsters[m].i-1;
                 }
@@ -85,7 +88,7 @@ function updateMonster() {
                     monsters[m].priorValue = board[monsters[m].i][monsters[m].j+1];
                     monsters[m].j = monsters[m].j+1;
                 }
-                else if (isValidMove(monsters[m].i-1 ,monsters[m].j)) { // if needs to go left
+                else if (randDirection < 0.5 && isValidMove(monsters[m].i-1 ,monsters[m].j)) { // if needs to go left
                     monsters[m].priorValue = board[monsters[m].i-1][monsters[m].j];
                     monsters[m].i = monsters[m].i-1;
                 }
@@ -104,12 +107,12 @@ function updateMonster() {
             }
         }
         else {  // go up or down
-            if(vertical > 0) { // if needs to go left
+            if(goLeftOrRight > 0) { // if needs to go left
                 if (isValidMove(monsters[m].i-1 ,monsters[m].j)) {  // left
                     monsters[m].priorValue = board[monsters[m].i-1][monsters[m].j];
                     monsters[m].i = monsters[m].i-1;
                 }
-                else if (isValidMove(monsters[m].i ,monsters[m].j-1)) { // if needs to go up
+                else if (randDirection < 0.5 && isValidMove(monsters[m].i ,monsters[m].j-1)) { // if needs to go up
                     monsters[m].priorValue = board[monsters[m].i][monsters[m].j-1];
                     monsters[m].j = monsters[m].j-1;
                 }
@@ -131,7 +134,7 @@ function updateMonster() {
                     monsters[m].priorValue = board[monsters[m].i+1][monsters[m].j];
                     monsters[m].i = monsters[m].i+1;
                 }
-                else if (isValidMove(monsters[m].i ,monsters[m].j-1)) {  // if needs to go up
+                else if (randDirection < 0.5 && isValidMove(monsters[m].i ,monsters[m].j-1)) {  // if needs to go up
                     monsters[m].priorValue = board[monsters[m].i][monsters[m].j-1];
                     monsters[m].j = monsters[m].j-1;
                 

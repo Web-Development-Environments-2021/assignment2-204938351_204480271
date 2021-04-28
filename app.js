@@ -18,6 +18,7 @@ var interval;
 var intervalBonusStrawberry;
 var intervalMonsters;
 var food_remain=70;
+scoreGoal = 70;
 var numOf5PointsBall=30;
 var numOf15PointsBall=15;
 var numOf25PointsBall=5;
@@ -57,7 +58,7 @@ function Start() {
 			e.preventDefault();
 		}
 	}, false);
-	// themeSong.play();
+	themeSong.play();
 	board = new Array();
 	score = 0;
 	life = 5;
@@ -346,6 +347,7 @@ function Draw() {
 }
 
 function UpdatePosition() {
+	console.log(scoreGoal);
 	board[shape.i][shape.j] = 0;
 	// if(newGame == true) {
 		// Draw();
@@ -377,12 +379,15 @@ function UpdatePosition() {
 	}
 	if (board[shape.i][shape.j] == 1) {   //eating balls
 		score+= 5;
+		scoreGoal = scoreGoal-1;
 	}
 	else if (board[shape.i][shape.j] == 2) {
 		score+= 15;
+		scoreGoal = scoreGoal-1;
 	}
 	else if (board[shape.i][shape.j] == 3) {
 		score+= 25;
+		scoreGoal = scoreGoal-1;
 	}
 	else if (board[shape.i][shape.j] == 9) {   //eating medicin
 		life++;
@@ -416,8 +421,16 @@ function UpdatePosition() {
 	// pacman turns green 10 sec before game ends
 	if (score >= 20 && timer_time <= 10) {
 		pac_color = "green";
-	}
-	if (timer_time <= 0) {
+	} if (scoreGoal == 0) {
+		lblTime.value = 0
+		lblScore.value = score;
+		lblLife.value = life;
+		themeSong.pause();
+		window.clearInterval(interval);
+		window.clearInterval(intervalBonusStrawberry);
+		window.clearInterval(intervalMonsters);
+		window.alert("Game completed");
+	} if (timer_time <= 0) {
 		lblTime.value = 0
 		lblScore.value = score;
 		lblLife.value = life;
@@ -468,6 +481,7 @@ function reset() {
 	// score = 0;
 	gameTime = 150;
 	food_remain=70;
+	scoreGoal = 70;
 	numOf5PointsBall=30;
 	numOf15PointsBall=15;
 	numOf25PointsBall=5;

@@ -1,4 +1,4 @@
-var allUsers = [{userName: "k", password: "k", fullName: "k", email: "k", birthDate: "k"}, {userName: "a", password: "aaaa1111", fullName: "a", email: "a@a.com", birthDate: "2021-04-06"}]
+var allUsers = [{userName: "k", password: "k", fullName: "k", email: "k", birthDate: "k"}]
 var loggedIn = false;
 
 function submitDetails(){
