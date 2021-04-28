@@ -1,6 +1,6 @@
 * {
-  margin: 0;
-  padding: 0;
+  /* margin: 0; */
+  /* padding: 0; */
   box-sizing: border-box;
 }
 html{
@@ -19,6 +19,10 @@ body{
     background-attachment: fixed;
     background-size: 100% 100%;
     color: black;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    height: 100vh;
 }
 .header{
   display: inline;
@@ -108,12 +112,24 @@ h1 {
   word-spacing: 4px;
   letter-spacing:1px;
 }
+.settingTitle{
+  text-decoration: underline;
+}
 .setting{
   /* margin: 100px 100px; */
-  border: 1px solid #000000;
+  /* border: 1px solid #000000; */
   padding: 30px;
-  background-color: #dadada;
+  
   font-size: 200%;
+}
+.keyS{
+  background-color: #dadada;
+}
+.colorS{
+  background-color: #dadada;
+}
+.numMonsterS{
+  background-color: #dadada;
 }
 h2 {
   /* float: left; */
@@ -236,16 +252,9 @@ button:hover{
 }
 
 footer {
-  /* position:absolute;
-  bottom:0;
-  background-attachment: fixed;
   background-color: rgba(214, 212, 197, 0.322); 
-  */
   font-family: 'Courier New', Courier, monospace;
-  font-size: 70%;
-  /* position: fixed; */
-  left: 0;
-  bottom: 0;
+  font-size: 60%;
   width: 100%;
   background-color: rgba(214, 212, 197, 0.322);
   color: rgb(0, 0, 0);
