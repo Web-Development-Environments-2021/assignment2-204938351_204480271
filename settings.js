@@ -1,9 +1,7 @@
 function setKey(key, e) {
-    //TODO: fix
     let code = e.keyCode;
     let keyName = String.fromCharCode(code);
     console.log(code)
-    // if (47<code && code<106){
     if (code!=9 && code!=13){
         console.log(key, code)
         if (key == "left") {
@@ -60,7 +58,6 @@ function setgameTime(sec) {
 function setNumOfMonsters(num) {
     numOfMonsters = num;
     document.getElementById("numOfMonstersShow").innerHTML = numOfMonsters;
-    // console.log("settings num: " + numOfMonsters);
 }
 
 function setRandomSettings() {
@@ -90,17 +87,9 @@ function setRandomColor() {
 }
 
 function play() {
-    // if (newGame == true) {
-    //     context = canvas.getContext("2d");
-    //     Start();
-    //     show(settings, app);
-    //     // newGame = false;
-    // }
-    // else {
         $(document).ready(function() {
             context = canvas.getContext("2d");
             Start();
         });
         show(settings, app);
-    // }
 }

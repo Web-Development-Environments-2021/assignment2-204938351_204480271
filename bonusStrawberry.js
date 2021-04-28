@@ -1,8 +1,4 @@
 function placeStrawberry() {
-	// var emptyCell = findRandomEmptyCell(board);
-	// bonusStrawberryShape.i = emptyCell[0];
-	// bonusStrawberryShape.j = emptyCell[1];
-	// board[emptyCell[0]][emptyCell[1]] = 10;
     bonusStrawberryShape.i = Math.floor(size/2);
 	bonusStrawberryShape.j = Math.floor(size/2);
     board[Math.floor(size/2)][Math.floor(size/2)] = 10;
@@ -52,32 +48,5 @@ function UpdateBonusStrawberry() {
 		}
 	}
 	board[bonusStrawberryShape.i][bonusStrawberryShape.j] = 10;
-	// var currentTime = new Date();
-	// time_elapsed = (currentTime - start_time) / 1000;
-	// if (score >= 2000 && time_elapsed <= 1000) {  //TODO: what?
-	// 	pac_color = "green";
-	// }
-	// if (score == 500) { //TODO: where?
-	// 	lblScore.value = score;
-	// 	lblTime.value = time_elapsed
-	// 	window.clearInterval(interval);
-	// 	window.alert("Game completed");
-	// }
-	// else if (gameTime <= time_elapsed) {
-	// 	lblTime.value = time_elapsed
-	// 	lblScore.value = score;
-	// 	window.clearInterval(interval);
-	// 	if (score < 100) {
-	// 		alert("You are better than " + score + " points!")
-	// 	} else {
-	// 		alert("Winner")
-	// 	}
-	// } else if (gameTime <= time_elapsed && score < 100) {
-	// 	lblTime.value = time_elapsed
-	// 	lblScore.value = score;
-	// 	window.clearInterval(interval);
-	// 	alert("You are better than " + score + " points!")
-	// } else {
     Draw();
-	// }
 }

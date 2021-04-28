@@ -55,11 +55,8 @@ function updateMonster() {
     for (var m = 0; m < monsters.length; m++) {
         let goLeftOrRight = monsters[m].i - shape.i;
         let goUpOrDown = monsters[m].j - shape.j;
-        // let sideToSide = true;
         let randDirection = Math.random();
-        // console.log(randDirection);
         board[monsters[m].i][monsters[m].j] = monsters[m].priorValue;
-        // if (goUpOrDown < goLeftOrRight) { // go left or right
         if (randDirection < 0.5) { // go left or right
             if (goUpOrDown > 0 ) { // if needs to go up
                 if (isValidMove(monsters[m].i ,monsters[m].j-1)) {  // up

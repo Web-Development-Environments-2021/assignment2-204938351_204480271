@@ -38,15 +38,6 @@ var downKey = 40;
 var gameTime = 150;
 var numOfMonsters = 1;
 var themeSong = new Audio("theme.mp3");
-// var newGame = false;
-
-
-
-
-// $(document).ready(function() {
-// 	context = canvas.getContext("2d");
-// 	Start();
-// });
 
 function Start() {
 	console.log("here");
@@ -63,7 +54,6 @@ function Start() {
 	score = 0;
 	life = 5;
 	pac_color = "yellow";
-	// food_remain = setBallsNum($("#setBallsNum").val());
 	start_time = new Date();
 	for (var i = 0; i < size; i++) {
 		board[i] = new Array();
@@ -106,15 +96,7 @@ function Start() {
 			} else {
 				var randomNum = Math.random();
 				if (randomNum <= (1.0 * food_remain) / cnt) {
-					// console.log('first: rand=' + randomNum + '<= ' + (1.0 * food_remain) / cnt)
 					food_remain--;
-					// console.log(food_remain);
-					// var randomBall = Math.floor(Math.random()*3)+1
-					// if (ballPoints[randomBall-1] > 0) {
-					// 	console.log("random randomball " + randomBall)
-					// 	board[i][j] = randomBall;
-					// 	ballPoints[randomBall-1] = ballPoints[randomBall-1] - 1;
-					// }
 					var randomObject = Math.floor(Math.random()*3)+1
 					if (randomObject == 4) {  // wall
 						board[i][j] = randomObject;
@@ -125,7 +107,6 @@ function Start() {
 					}
 				// pacman
 				} else if (randomNum < (1.0 * (pacman_remain + food_remain)) / cnt) {
-					// console.log('second: rand=' + randomNum + '<' + (1.0 * (pacman_remain + food_remain)) / cnt);
 					shape.i = i;
 					shape.j = j;
 					pacman_remain--;
@@ -138,8 +119,6 @@ function Start() {
 			}
 		}
 	}
-	// console.log("monsters: " + numOfMonsters);
-	// console.log("begining: " + monsters.length);
 	monsters[0] = monster1;
 	monster1.priorValue = 0;
 		if (numOfMonsters > 1) {
@@ -154,13 +133,9 @@ function Start() {
 			monsters[3] = monster4;
 			monster4.priorValue = 0;
 		}
-
-	// console.log("end: " + monsters.length);
 	
 	// paint monster
 	intervalMonsters = setInterval(updateMonster, 400);
-	// monster1.priorValue = 0;
-	// intervalMonsters = setInterval(updateMonster(), 400);
 	// paint strawberry
 	placeStrawberry();
 
@@ -215,7 +190,6 @@ function Start() {
 		false
 	);
 	interval = setInterval(UpdatePosition, 200);
-	
 }
 
 function findRandomEmptyCell(board) {
@@ -224,7 +198,6 @@ function findRandomEmptyCell(board) {
 	while (board[i][j] != 0) {
 		i = Math.floor(Math.random() * (size-1) + 1);
 		j = Math.floor(Math.random() * (size-1) + 1);
-		// console.log("help")
 	}
 	return [i, j];
 }
@@ -349,9 +322,6 @@ function Draw() {
 function UpdatePosition() {
 	console.log(scoreGoal);
 	board[shape.i][shape.j] = 0;
-	// if(newGame == true) {
-		// Draw();
-	// }
 	var x = GetKeyPressed();
 	if (x == 5) {   //up
 		if (shape.j > 0 && board[shape.i][shape.j - 1] != 4) {
@@ -477,8 +447,6 @@ function reset() {
 	monster4 = new Object();
 	monsters = new Array();
 	bonusStrawberryShape = new Object();
-	// life = 5;
-	// score = 0;
 	gameTime = 150;
 	food_remain=70;
 	scoreGoal = 70;

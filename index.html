@@ -26,7 +26,6 @@
 				</ul>
 				<p style="margin: 30px" id="helloUsername">Hello, Guest</p>
 			</div>
-			<!-- </nav> -->
 
 			<div id="aboutModal" class="modal"  style="display: none">
 				<div class="modal-content">
@@ -52,7 +51,6 @@
 					<button class="menuBut" onclick="show(welcome, login)">Login</button>
 					<button class="menuBut" onclick="show(welcome, register)">Register</button>
 				</div>
-				<!-- <button id="playBtn" class="menuBut" display="none" onclick="show(welcome, app)">play</button> -->
 			</div>
 
 			<div id="register" style="display: none" align=center>
@@ -95,7 +93,6 @@
 				<p id="loginError"></p>	
 			</div>
 				
-
 			<div id="settings" style="display: none" align=center>
 				<h1 class="settingTitle">game settings</h1>
 
@@ -164,13 +161,11 @@
 				<br><br><br>
 				<button class="playButton" type="button" onclick="play()">play</button>
 				<button class="settingButton" type="button" onclick="setRandomSettings()">random play</button>
-				<!-- <button class="playButton" type="button" onclick="show(settings, app)">play</button> -->
 			</div>
 
 			<div id="app" style="display: none" >
 				<div class="appContainer">
 					<div class="sidebar" style="float: right">
-						<!-- <br><br><br> -->
 						<div class="scoreBoard">
 							<div id="score board">
 								<label for="lblScore">SCORE:</label>
@@ -220,7 +215,6 @@
 							<p id="numOfMonstersShow">1</p>
 						</div>
 						<button style="width: 30%" class="newGameBtn" onclick="StartNewGame()">New Game</button>
-						<!-- <br><br><br> -->
 					</div>
 					<div class="game">
 						<canvas id="canvas" height="780" width="780"></canvas>
@@ -257,7 +251,6 @@
 			}
 			activScreen = toShow;
 
-			
 		}
 		function menuClickShow(pressedOption){
 			if (activScreen == welcome && pressedOption == settings) {
@@ -317,9 +310,6 @@
 				reset();
 				show(app, welcome);
 			}
-
 		}
 	</script>
-
-
 </html>
